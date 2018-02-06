@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__STATIC__/css/login.css">
+    <script src="__STATIC__/js/jquery.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-header">
+        <a href="{:url('index')}">
+            <img src="__STATIC__/img/footerlogo.png">
+        </a>
+    </div>
+
+    <div class="login-body">
+        <div class="login-bg">
+            <img src="__STATIC__/img/login.jpg" alt="">
+        </div>
+        <div class="login-form">
+
+            <h2 class="header text-center">
+                用户登录
+            </h2>
+            <hr>
+
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="input-group has-success ">
+                                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input type="text" class="form-control " name="usernmae" placeholder="用户名">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="input-group has-success">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                            <input type="password" class="form-control " name="password" placeholder="密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group has-warning">
+                    <img src="{:captcha_src()}" alt="captcha" class="col-sm-offset-2 col-sm-4" />
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" name="yzm" placeholder="验证码">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button type="submit" class="btn btn-danger col-md-12">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="footer-left">
+            <ul>
+                <li>
+                    <a href="http://www.trs.com.cn/gywm/gsjj/">关于我们</a>
+                </li>
+                <li>
+                    <a hef="#">加入我们</a>
+                </li>
+                <li>
+                    <a href="http://www.trs.com.cn/gywm/lxwm/">联系我们</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-right">
+            <ul>
+                <li>
+                    ©2017 北京拓尔思信息技术股份有限公司 版权所有.
+                </li>
+
+                <li>平台BUG反馈：
+                    <a href="mailto:wang.daliang@trs.com.cn">wang.daliang@trs.com.cn
+                    </a>
+                </li>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TRS WEB安全平台</title>
+<!--     
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__STATIC__/css/index.css">
+    <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
+    <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script> 
+-->
+
+
+    <script>
+        window.hdjs = {};
+        //组件目录必须绝对路径(在网站根目录时不用设置)
+        window.hdjs.base = '__STATIC__/node_modules/hdjs';
+        //上传文件后台地址
+        window.hdjs.uploader = 'test/php/uploader.php?';
+        //获取文件列表的后台地址
+        window.hdjs.filesLists = 'test/php/filesLists.php?';
+    </script>
+    <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
+    <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{:url('index/index/index')}">
+                    <!-- <span class="glyphicon glyphicon-cloud" aria-hidden="true"> -->
+                    <img src="__STATIC__/img/footerlogo.png" height="20">
+                </a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="{:url('index/user/index')}">个人首页 </a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/fix/index')}">补丁发布公告</a>
+                    </li>
+                    <li>
+                        <a href="#">安全文章</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{:url('index/vul/vul')}">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;提交安全漏洞</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">已提交漏洞</a>
+                            </li>
+                            <li>
+                                <a href="{:url('index/user/index')}">个人中心</a>
+                            </li>
+                            <li>
+                                <a href="#">系统通知</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-list">
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 项目管理</li>
+                    <li>
+                        <a href="{:url('index/item/index')}">我的项目</a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/item/store')}">添加项目</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-shield fa-fw"></i> 漏洞管理</li>
+                    <li>
+                        <a href="{:url('index/vul/index')}">我的漏洞</a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/vul/vul')}">报告漏洞</a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/vul/draft')}">草稿箱</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-cog fa-fw"></i> 工具扫描</li>
+                    <li>
+                        <a href="{:url('index/tool/tool')}">常用工具</a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/tool/scan')}">产品扫描</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-user fa-fw"></i> 个人中心</li>
+                    <li>
+                        <a href="{:url('index/user/profile')}">我的资料</a>
+                    </li>
+                    <li>
+                        <a href="{:url('index/user/pass')}">修改密码</a>
+                    </li>
+                </ul>
+            </div>
+            <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
+            <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
+                <div class="main">
+                    
+                    {block name="user_content"} {/block}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<link rel="stylesheet" href="__STATIC__/css/index.css">
+<link rel="stylesheet" href="__STATIC__/css/dashboard.css">
+
+</html>

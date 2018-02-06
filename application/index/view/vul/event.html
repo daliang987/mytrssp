@@ -1,0 +1,146 @@
+{extend name="user_base" /} {block name="user_content"}
+
+<div class="alert alert-info">
+    请提交您的安全事件！
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{:url('vul')}">提交漏洞</a>
+                    </li>
+                    <li class="active">
+                        <a href="{:url('event')}">提交事件</a>
+                    </li>
+                </ul>
+                <div class="main">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="projectname" class="col-sm-2 col-md-2 control-label">项目名称
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" class="form-control" id="projectname" placeholder="请输入项目名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventname" class="col-sm-2 col-md-2 control-label">
+                                事件标题
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" class="form-control" id="eventname" placeholder="请输入事件标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vulproduct" class="col-sm-2 col-md-2 control-label">所属产品
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-5 col-md-5">
+                                <select id="vulproduct" class="form-control">
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <select name="vultype" class="form-control">
+                                    <option value="1">6.5 14304</option>
+                                    <option value="1">7.0</option>
+                                    <option value="1">6.0 1088</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="eventtype" class="col-sm-2 col-md-2 control-label">事件类型
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="eventtype" class="form-control">
+                                    <option value="1">数据泄露</option>
+                                    <option value="2">入侵事件</option>
+                                    <option value="3">攻击线索</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventlevel" class="col-sm-2 col-md-2 control-label">事件等级
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select name="" id="eventlevel" class="form-control">
+                                    <option selected disabled>请选择事件等级</option>
+                                    <option value="1">高危</option>
+                                    <option value="2">中危</option>
+                                    <option value="3">低危</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventdesc" class="col-sm-2 col-md-2 control-label">事件描述
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <textarea class="form-control" rows="5" id="eventdesc" placeholder="请输入事件概述，请勿在此输入URL、利用方式、发生场景等具体信息"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">事件详情
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <textarea id="editor"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventfile" class="col-sm-2 col-md-2 control-label">附件上传</label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="file" name="" id="eventfile">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2 col-md-2">
+                                <button type="submit" class="btn btn-danger">提交事件</button>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <button type="button" class="btn btn-info">预览事件</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    提交事件须知
+                </div>
+            </div>
+            <div class="panel-body">
+                <ol>
+                    <li>提交事件须知</li>
+                    <li>提交事件须知</li>
+                    <li>提交事件须知</li>
+                    <li>提交事件须知</li>
+                    <li>提交事件须知</li>
+                </ol>
+                提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，提交事件须知，
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script> {/block}

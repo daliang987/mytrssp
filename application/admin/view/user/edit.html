@@ -1,0 +1,106 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    修改用户
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-7">
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-3 col-md-3 control-label">
+                            用户名
+                            <span class="text-danger">*</span>
+                        </label>
+                        <!-- <div class="col-sm-8 col-md-8"> -->
+                        <div class="col-sm-8 col-md-8">
+                            <label class="form-control-static">{$user.username}</label>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="realname" class="col-sm-3 col-md-3 control-label">
+                            真实姓名
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" name="realname" value="{$user.realname}" id="realname" placeholder="真实姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcompany" class="col-sm-3 col-md-3 control-label">
+                            所属分公司
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <select name="subcom_id" id="subcompany" class="form-control">
+                                {volist name="sub" id="vo"}
+                                <option value="{$vo.subcom_id}" {if condition="$user.subcom_id==$vo.subcom_id"}selected{/if}>{$vo._subcom_name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="department" class="col-sm-3 col-md-3 control-label">
+                            所属部门
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" name="department" value="{$user.department}" id="department" placeholder="所属部门">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="job" class="col-sm-3 col-md-3 control-label">
+                            职位
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" value="{$user.job}" name="job" id="job" placeholder="职位">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 col-md-3 control-label">
+                            邮箱
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" name="email" value="{$user.email}" id="email" placeholder="邮箱">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-3 col-md-3 control-label">
+                            电话
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" name="phone" value="{$user.phone}" id="phone" placeholder="电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="level" class="col-sm-3 col-md-3 control-label">
+                            用户级别
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <select name="level" id="level" class="form-control">
+                                <option value="1" {if condition="$user.level==1"}selected{/if}>普通用户</option>
+                                <option value="2" {if condition="$user.level==2"}selected{/if}>高级用户</option>
+                                <option value="3" {if condition="$user.level==3"}selected{/if}>管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="uid" value="{$user.uid}">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-md-offset-3 col-sm-8 col-md-8">
+                            <input type="submit" class="form-control btn btn-danger" value="修改用户">
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block}

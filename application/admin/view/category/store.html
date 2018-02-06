@@ -1,0 +1,57 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    添加栏目
+</div>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li>
+                <a href="{:url('admin/category/index')}">栏目首页</a>
+            </li>
+            <li class="active">
+                <a href="{:url('admin/category/store')}">创建栏目</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">栏目名称</label>
+                        <div class="col-md-8">
+                            <input type="text" name="cate_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">所属栏目</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="cate_pid">
+                                <option value="0">顶级栏目</option>
+                                
+                                {volist name="cate_data" id="ca"}
+                                <option value="{$ca.cate_id}">{$ca._cate_name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">排序</label>
+                        <div class="col-md-8">
+                            <input type="text" name="cate_sort" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-offset-2 col-md-8">
+                            <input type="submit" class="form-control col-md-12 btn-info" value="创建栏目">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

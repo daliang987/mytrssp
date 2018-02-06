@@ -1,0 +1,67 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+
+<div class="alert alert-info">
+    公司列表
+</div>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="" method="post" class="bs-example bs-example-form">
+                    <div class="input-group">
+                        <span class="input-group-addon">公司名称</span>
+                        <input type="text" name="sub_search" class="form-control">
+                        <div class="input-group-btn">
+
+                            <button class="btn btn-primary">搜索</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <hr>
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>编号</th>
+                <th>分公司名称</th>
+
+                <th>操作</th>
+            </tr>
+            {volist name="dataSubcom" id="vo"}
+            <tr>
+                <td>{$vo.subcom_id}</td>
+                <td>
+                    {$vo._subcom_name}
+                </td>
+                <td>
+                    <div class="btn-group col-md-12">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">操作
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{:url('edit',['subcom_id'=>$vo.subcom_id])}">编辑</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:del({$vo.subcom_id})">删除</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+</div>
+<script>
+    function del(id) {
+        require(['hdjs'], function (hdjs) {
+            hdjs.confirm('确定删除吗?', function () {
+                location.href = "{:url('del')}"+"?subcom_id=" + id;
+            });
+        });
+    }
+</script> {/block}

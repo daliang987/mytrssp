@@ -1,0 +1,63 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    修改密码
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="main">
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="currpass" class="col-sm-4 col-md-4 control-label">
+                                用户名
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-4 col-md-4">
+                                <label class="form-control-static">{$user.username}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="currpass" class="col-sm-4 col-md-4 control-label">
+                                当前密码
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="password" class="form-control" name="password" id="currpass" placeholder="当前密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newpass" class="col-sm-4 col-md-4 control-label">
+                                新密码
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="password" class="form-control" name="newpass" id="newpass" placeholder="新密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repass" class="col-sm-4 col-md-4 control-label">
+                                确认新密码
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-4 col-md-4">
+                                <input type="password" class="form-control" name="repass" id="repass" placeholder="确认新密码">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="uid" value="{$user.uid}">
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-md-offset-4 col-sm-4 col-md-4">
+                                <input type="submit" class="form-control btn btn-danger" value="修改密码">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

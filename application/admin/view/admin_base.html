@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TRS WEB安全平台</title>
+    <!--     
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
+    <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
+    <script src="__STATIC__/js/jquery.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script> 
+-->
+    <script>
+        window.hdjs = {};
+        //组件目录必须绝对路径(在网站根目录时不用设置)
+        window.hdjs.base = '__STATIC__/node_modules/hdjs';
+        //上传文件后台地址
+        window.hdjs.uploader = 'test/php/uploader.php?';
+        //获取文件列表的后台地址
+        window.hdjs.filesLists = 'test/php/filesLists.php?';
+    </script>
+    <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
+    <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{:url('index/index/index')}">
+                    <!-- <span class="glyphicon glyphicon-cloud" aria-hidden="true"> -->
+                    <img src="__STATIC__/img/footerlogo.png" height="20">
+                </a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="{:url('admin/user/index')}">管理后台 </a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/pub/index')}">公告与文章</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/other/index')}">其他管理</a>
+                    </li>
+                    <li>
+                        <a href="#">网站管理</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{:url('admin/vul/vul')}">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;提交安全漏洞</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">已提交漏洞</a>
+                            </li>
+                            <li>
+                                <a href="{:url('admin/user/index')}">个人中心</a>
+                            </li>
+                            <li>
+                                <a href="#">系统通知</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-list">
+                    <li class="nav-header">
+                        <i class="fa fa-user fa-fw"></i> 漏洞类型管理</li>
+                    <li>
+                        <a href="{:url('admin/vultype/index')}">漏洞列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/vultype/store')}">添加漏洞</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 公司组织管理
+                    </li>
+                    <li>
+                        <a href="{:url('admin/subcom/index')}">分公司列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/subcom/store')}">添加公司</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-user fa-fw"></i> 用户管理</li>
+                    <li>
+                        <a href="{:url('admin/user/index')}">用户列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/user/store')}">添加用户</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-user fa-fw"></i> 安全文章</li>
+                    <li>
+                        <a href="{:url('admin/article/index')}">文章列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/article/store')}">发布文章</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/category/index')}">分类管理</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 产品管理</li>
+                    <li>
+                        <a href="{:url('admin/product/index')}">产品列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/product/store')}">添加产品</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 项目综合管理</li>
+                    <li>
+                        <a href="{:url('admin/item/index')}"> 项目列表</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-shield fa-fw"></i> 应急管理</li>
+                    <li>
+                        <a href="{:url('admin/vul/index')}">漏洞管理</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/vul/vul')}">事件列表</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-cog fa-fw"></i> 工具管理</li>
+                    <li>
+                        <a href="{:url('admin/tool/tool')}">常用工具管理</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/tool/scan')}">扫描器设置</a>
+                    </li>
+
+                    <li class="nav-header">
+                        <i class="fa fa-user fa-fw"></i> 网站管理</li>
+                    <li>
+                        <a href="{:url('admin/user/profile')}">标签管理</a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
+                <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
+                <div class="main">
+                    {block name="admin_content"} {/block}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="__STATIC__/css/index.css">
+    <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
+
+</body>
+
+<script>
+    window.onload = function () {
+        $(".nav-header").click(function () {
+            // $(".nav-header").nextUntil(".nav-header").slideUp();
+            $(this).nextUntil(".nav-header").slideToggle();
+        });
+
+
+        $("li a").each(function () {
+            if ($(this).attr('href') == location.pathname) {
+                $(this).addClass('active');
+            }
+        });
+    }
+
+</script>
+
+</html>

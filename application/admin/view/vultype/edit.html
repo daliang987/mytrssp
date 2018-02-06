@@ -1,0 +1,43 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    修改漏洞
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-7">
+                <form class="form-horizontal" method="post">
+
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 col-md-3 control-label">
+                            一级分类名称
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" placeholder="漏洞/事件" name="t_first" value="{$vtype.t_first}" id="" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 col-md-3 control-label">
+                            二级漏洞名称
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-8 col-md-8">
+                            <input type="text" class="form-control" placeholder="漏洞/事件详细名称" name="t_second" value="{$vtype.t_second}" id="" >
+                        </div>
+                    </div>
+                    <input type="hidden" name="tid" value="{$vtype.tid}">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-md-offset-3 col-sm-8 col-md-8">
+                            <input type="submit" class="form-control btn btn-danger" value=" 添加漏洞">
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block}

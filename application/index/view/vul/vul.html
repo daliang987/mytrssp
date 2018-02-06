@@ -1,0 +1,149 @@
+{extend name="user_base" /} {block name="user_content"}
+
+<div class="alert alert-info">
+    请提交您的安全漏洞！
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="{:url('vul')}">提交漏洞</a>
+                    </li>
+                    <li>
+                        <a href="{:url('event')}">提交事件</a>
+                    </li>
+                </ul>
+                <div class="main">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="projectname" class="col-sm-2 col-md-2 control-label">项目名称
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" class="form-control" id="projectname" placeholder="请输入项目名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vulname" class="col-sm-2 col-md-2 control-label">
+                                漏洞标题
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" class="form-control" id="vulname" placeholder="请输入漏洞标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vulproduct" class="col-sm-2 col-md-2 control-label">所属产品
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-5 col-md-5">
+                                <select id="vulproduct" class="form-control">
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                    <option value="1">WCM</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <select name="vultype" class="form-control">
+                                    <option value="1">6.5 14304</option>
+                                    <option value="1">7.0</option>
+                                    <option value="1">6.0 1088</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vulproduct" class="col-sm-2 col-md-2 control-label">漏洞类型
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="vulproduct" class="form-control">
+                                    <option value="1">xss</option>
+                                    <option value="1">csrf</option>
+                                    <option value="1">sql</option>
+                                    <option value="1">upload</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vullevel" class="col-sm-2 col-md-2 control-label">漏洞等级
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select name="" id="vullevel" class="form-control">
+                                    <option selected disabled>请选择漏洞等级</option>
+                                    <option value="1">高危</option>
+                                    <option value="2">中危</option>
+                                    <option value="3">低危</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vuldesc" class="col-sm-2 col-md-2 control-label">漏洞描述
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <textarea class="form-control" rows="5" id="vuldesc" placeholder="请输入漏洞概述，请勿在此输入URL、利用方式、发生场景等具体信息"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vulpostion" class="col-sm-2 col-md-2 control-label">漏洞url/位置
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" class="form-control" id="vulpostion" placeholder="请输入漏洞url/位置">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">漏洞详情
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+
+                                <textarea id="editor"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vulfile" class="col-sm-2 col-md-2 control-label">附件上传</label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="file" name="" id="vulfile">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2 col-md-2">
+                                <button type="submit" class="btn btn-danger">提交漏洞</button>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <button type="button" class="btn btn-info">预览漏洞</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    提交漏洞须知
+                </div>
+            </div>
+            <div class="panel-body">
+                提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，提交漏洞须知，
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script> {/block}

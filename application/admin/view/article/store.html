@@ -1,0 +1,128 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    发布安全文章
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="main">
+                    <form class="form-horizontal" method="post" role="form">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">
+                                文章标题
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <input type="text" name="arc_title" class="form-control" id="" placeholder="请输入文章标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">文章作者
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <input type="text" name="arc_author" class="form-control" id="" placeholder="请输入文章作者">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">文章分类
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <select name="t_first" id="" class="form-control" name="arc_type">
+                                    {volist name="cate_data" id="cate"}
+                                    <option value="{$cate.cate_id}">{$cate._cate_name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">分类标签
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <div class="checkbox" id="second">
+                                    {volist name="_tag" id="tag"}
+                                    <label>
+                                        <input name="type[]" value="{$tag.tid}" type="checkbox">{$tag.t_second}</label>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">产品分类
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <div class="checkbox" id="second">
+                                    {volist name="_tag" id="tag"}
+                                    <label>
+                                        <input name="type[]" value="{$tag.tid}" type="checkbox">{$tag.t_second}</label>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">文章内容
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <div id="editormd">
+                                    <textarea name="arc_content" hidden></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">附件
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-md-9">
+                                <button onclick="upFile(this)" class="btn btn-success" type="button">选择文件</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2 col-md-2">
+                                <button type="submit" class="btn btn-danger">发布文章</button>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <button type="button" class="btn btn-info">预览文章</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.markdown("editormd", {
+            width: '100%'
+        });
+    });
+</script>
+<script>
+    require(['hdjs']);
+    //上传图片
+    function upFile() {
+        require(['hdjs'], function (hdjs) {
+            var options = {
+                extensions: 'txt,doc,docx,rar,zip,pdf',
+                //data是向后台服务器提交的POST数据
+                data: { name: '后盾人', year: 2099 },
+                //单个文件允许为5MB
+                fileSingleSizeLimit: 5 * 1024 * 1024
+            };
+            hdjs.file(function (files) {
+                //上传成功的文件，数组类型
+                console.log(files);
+            }, options)
+        });
+    }
+</script> {/block}
