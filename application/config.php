@@ -43,7 +43,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'trim',
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
@@ -239,14 +239,5 @@ return [
         'list_rows' => 15,
     ],
 
-    //验证码配置
-    'capthca'=>[
-        'codeSet'=>'0123456789',
-        'fontSize'=>20,
-        'useCurve'=>true,
-        'imageH'=>20,
-        'imageW'=>50,
-        'reset'=>true,
-        'useNoise'=>true,
-    ],
+    
 ];

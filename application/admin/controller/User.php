@@ -1,10 +1,10 @@
 <?php
 
 namespace app\admin\controller;
-use app\common\Model\Common;
+use app\common\controller\Admin;
 use think\Controller;
 
-class User extends Common{
+class User extends Admin{
 
     protected $db;
 

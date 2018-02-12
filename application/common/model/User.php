@@ -82,4 +82,5 @@ class User extends Model
             return ['valid'=>0,'msg'=>$this->getError()];
         }
     }
+
 }

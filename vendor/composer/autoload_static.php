@@ -35,6 +35,7 @@ class ComposerStaticInit72a85f69782724a9ddb9dfee0362af6f
         ),
         'h' => 
         array (
+            'houdunwang\\file\\' => 16,
             'houdunwang\\arr\\' => 15,
         ),
         'W' => 
@@ -106,6 +107,10 @@ class ComposerStaticInit72a85f69782724a9ddb9dfee0362af6f
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'houdunwang\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/houdunwang/file/src',
         ),
         'houdunwang\\arr\\' => 
         array (

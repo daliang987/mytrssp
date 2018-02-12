@@ -1,7 +1,7 @@
 <?php
 
 namespace app\index\controller;
-use app\common\model\Common;
+use app\common\controller\Common;
 use think\Controller;
 
 class User extends Common{

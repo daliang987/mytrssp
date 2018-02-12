@@ -18,9 +18,9 @@
         //组件目录必须绝对路径(在网站根目录时不用设置)
         window.hdjs.base = '__STATIC__/node_modules/hdjs';
         //上传文件后台地址
-        window.hdjs.uploader = 'test/php/uploader.php?';
+        window.hdjs.uploader = '{:url("admin/upload/upload")}'+'?';
         //获取文件列表的后台地址
-        window.hdjs.filesLists = 'test/php/filesLists.php?';
+        window.hdjs.filesLists = '{:url("admin/upload/filelist")}'+'?';
     </script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
@@ -69,7 +69,8 @@
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;提交安全漏洞</a>
                     </li>
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {:session('session.username')}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -131,9 +132,6 @@
                         <a href="{:url('admin/article/index')}">文章列表</a>
                     </li>
                     <li>
-                        <a href="{:url('admin/article/store')}">发布文章</a>
-                    </li>
-                    <li>
                         <a href="{:url('admin/category/index')}">分类管理</a>
                     </li>
                     <li class="nav-header">
@@ -148,7 +146,7 @@
                     <li class="nav-header">
                         <i class="fa fa-list-alt fa-fw"></i> 项目综合管理</li>
                     <li>
-                        <a href="{:url('admin/item/index')}"> 项目列表</a>
+                        <a href="{:url('admin/project/index')}"> 项目列表</a>
                     </li>
 
                     <li class="nav-header">

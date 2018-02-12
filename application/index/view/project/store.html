@@ -13,13 +13,13 @@
                     </li>
                 </ul>
                 <div class="main">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="post">
                         <div class="form-group">
                             <label for="itemname" class="col-sm-2 col-md-2 control-label">项目名称
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="text" class="form-control" id="itemname" placeholder="请输入项目名称">
+                                <input type="text" name="pro_name" class="form-control" id="itemname" placeholder="请输入项目名称">
                             </div>
                         </div>
                         <div class="form-group">
@@ -28,37 +28,24 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-3 col-md-3">
-                                <select name="province" id="itemaddr" class="form-control">
-                                </select>
+                                <select name="pro_locate_province" class="form-control"></select>
                             </div>
                             <div class="col-sm-3 col-md-3">
-                                <select name="city" id="itemaddr" class="form-control">
-                                </select>
+                                <select name="pro_locate_city" class="form-control"></select>
                             </div>
                             <div class="col-sm-3 col-md-3">
-                                <select name="area" id="itemaddr" class="form-control">
-                                </select>
+                                <select name="pro_locate_district" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 col-md-2 control-label">所属产品
                                 <span class="text-danger">*</span>
                             </label>
-                            <div class="col-sm-4 col-md-4">
-                                <select id="vulproduct" class="form-control">
-                                    <option value="1">WCM</option>
-                                    <option value="1">IDS</option>
-                                    <option value="1">MAS</option>
-                                    <option value="1">WAS</option>
-                                </select>
-                            </div>
-                            <label class="col-sm-2 col-md-2 control-label">版本
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-4 col-md-4">
-                                <select id="vulproduct" class="form-control col-sm-12">
-                                    <option value="1">6.5</option>
-                                    <option value="1">7.0</option>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="vulproduct" name="pro_product_id" class="form-control">
+                                    {volist name="_pdt_data" id="pdt"}
+                                    <option value="{$pdt.pdt_id}">{$pdt.pdt_name} {$pdt.pdt_version}</option>
+                                    {/volist}
                                 </select>
                             </div>
                         </div>
@@ -67,16 +54,17 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <select name="" id="itemproperty" class="form-control">
+                                <select name="pro_level" id="itemproperty" class="form-control">
                                     <option selected disabled>请选择项目性质</option>
-                                    <option value="1">部委</option>
-                                    <option value="2">省厅</option>
-                                    <option value="3">市局</option>
-                                    <option value="3">区县</option>
-                                    <option value="3">媒体</option>
-                                    <option value="3">教育科研</option>
-                                    <option value="3">事业单位</option>
-                                    <option value="3">金融</option>
+                                    <option value="部委">部委</option>
+                                    <option value="省厅">省厅</option>
+                                    <option value="市局">市局</option>
+                                    <option value="区县">区县</option>
+                                    <option value="媒体">媒体</option>
+                                    <option value="教育科研">教育科研</option>
+                                    <option value="事业单位">事业单位</option>
+                                    <option value="金融">金融</option>
+                                    <option value="其他">其他</option>
                                 </select>
                             </div>
                         </div>
@@ -86,25 +74,26 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-2 col-md-2">
-                                <select class="form-control">
-                                    <option>外网</option>
-                                    <option>内网</option>
+                                <select class="form-control" name="pro_net_type">
+                                    <option value="外网">外网</option>
+                                    <option value="内网">内网</option>
                                 </select>
                             </div>
                             <div class="col-sm-8 col-md-8">
-                                <input type="text" class="form-control" id="itemurl" placeholder="项目URL地址">
+                                <input type="text" name="pro_url" class="form-control" id="itemurl" placeholder="项目URL地址">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="itemdesc" class="col-sm-2 col-md-2 control-label">项目备注
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <textarea class="form-control" rows="5" id="itemdesc" placeholder="请输入项目备注"></textarea>
+                                <textarea class="form-control" name="pro_remark" rows="5" id="itemdesc" placeholder="请输入项目备注"></textarea>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-2 col-md-2">
-                                <button type="submit" class="btn btn-danger">提交项目</button>
+                                <input type="submit" class="btn btn-danger" value="提交项目">
                             </div>
                             <div class="col-sm-4 col-md-4">
                                 <button type="button" class="btn btn-info">预览项目</button>
@@ -130,5 +119,21 @@
     </div>
 </div>
 <script>
-    new PCAS("province", "city", "area");
+    require(['hdjs'], function (hdjs) {
+        hdjs.city({
+            //省份标签
+            province: document.querySelector('[name="pro_locate_province"]'),
+            //城市标签
+            city: document.querySelector('[name="pro_locate_city"]'),
+            //地区标签
+            area: document.querySelector('[name="pro_locate_district"]'),
+        }, {
+                //默认省
+                province: '北京市',
+                //默认市
+                city: '市',
+                //默认地区
+                area: '区/县',
+            });
+    })
 </script> {/block}

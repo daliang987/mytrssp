@@ -17,6 +17,7 @@ return array(
     'think\\angular\\' => array($vendorDir . '/topthink/think-angular/src'),
     'think\\' => array($baseDir . '/thinkphp/library/think', $vendorDir . '/topthink/think-image/src', $vendorDir . '/topthink/think-queue/src'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'houdunwang\\file\\' => array($vendorDir . '/houdunwang/file/src'),
     'houdunwang\\arr\\' => array($vendorDir . '/houdunwang/arr/src'),
     'Workerman\\' => array($vendorDir . '/workerman/workerman'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),

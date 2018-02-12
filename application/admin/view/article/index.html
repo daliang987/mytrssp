@@ -19,9 +19,21 @@
                     </div>
                 </form>
             </div>
-
+            <div class="col-md-offset-5 col-md-2">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">新建
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    {volist name="_cate" id="cate"}
+                    <li>
+                        <a href="{:url('article',['cate_id'=>$cate.cate_id])}">{$cate.cate_name}</a>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
         </div>
         <hr>
+
         <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
                 <th>编号</th>

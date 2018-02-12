@@ -1,0 +1,154 @@
+{extend name="admin_base" /} {block name="admin_content"}
+<script src="__STATIC__/js/PCASClass.js"></script>
+<div class="alert alert-info">
+    添加项目
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="{:url('edit')}">修改项目</a>
+                    </li>
+                </ul>
+                <div class="main">
+                    <form class="form-horizontal" role="form" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-md-2 control-label">所属分公司
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="vulproduct" name="pro_subcom_id" class="form-control">
+                                    {volist name="_subcom" id="subcom"}
+                                    <option value="{$subcom.subcom_id}" {if condition="$subcom.subcom_id=$_pro_data.pro_subcom_id" } selected{/if}>{$subcom.subcom_name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemname" class="col-sm-2 col-md-2 control-label">项目名称
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <input type="text" name="pro_name" value="{$_pro_data.pro_name}" class="form-control" id="itemname" placeholder="请输入项目名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-md-2 control-label">
+                                项目所在地
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-3 col-md-3">
+                                <select name="pro_locate_province" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <select name="pro_locate_city" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <select name="pro_locate_district" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-md-2 control-label">所属产品
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="vulproduct" name="pro_product_id" class="form-control">
+                                    {volist name="_pdt_data" id="pdt"}
+                                    <option value="{$pdt.pdt_id}" {if condition="$pdt.pdt_id=$_pro_data.pro_product_id" } {/if}>{$pdt.pdt_name} {$pdt.pdt_version}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemproperty" class="col-sm-2 col-md-2 control-label">项目性质
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <select name="pro_level" id="itemproperty" class="form-control">
+                                    <option selected disabled>请选择项目性质</option>
+                                    <option value="部委">部委</option>
+                                    <option value="省厅">省厅</option>
+                                    <option value="市局">市局</option>
+                                    <option value="区县">区县</option>
+                                    <option value="媒体">媒体</option>
+                                    <option value="教育科研">教育科研</option>
+                                    <option value="事业单位">事业单位</option>
+                                    <option value="金融">金融</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemurl" class="col-sm-2 col-md-2 control-label">项目地址
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-2 col-md-2">
+                                <select class="form-control" name="pro_net_type">
+                                        
+                                    <option {if condition="$_pro_data.pro_net_type=='外网'" }selected{/if} value="外网">外网</option>
+                                    <option {if condition="$_pro_data.pro_net_type=='内网'" }selected{/if} value="内网">内网</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-8 col-md-8">
+                                <input type="text" name="pro_url" value="{$_pro_data.pro_url}" class="form-control" id="itemurl" placeholder="项目URL地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemdesc" class="col-sm-2 col-md-2 control-label">项目备注
+                            </label>
+                            <div class="col-sm-10 col-md-10">
+                                <textarea class="form-control" name="pro_remark" rows="5" id="itemdesc" placeholder="请输入项目备注">{$_pro_data.pro_remark}</textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="pro_id" value="{$_pro_data.pro_id}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2 col-md-2">
+                                <input type="submit" class="btn btn-danger" value="提交项目">
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <button type="button" class="btn btn-info">预览项目</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    提交须知
+                </div>
+            </div>
+            <div class="panel-body">
+                提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，提交项目须知，
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.city({
+            //省份标签
+            province: document.querySelector('[name="pro_locate_province"]'),
+            //城市标签
+            city: document.querySelector('[name="pro_locate_city"]'),
+            //地区标签
+            area: document.querySelector('[name="pro_locate_district"]'),
+        }, {
+                //默认省
+                province: '{$_pro_data.pro_locate_province}',
+                //默认市
+                city: '{$_pro_data.pro_locate_city}',
+                //默认地区
+                area: '{$_pro_data.pro_locate_district}',
+            });
+    })
+
+
+</script> {/block}

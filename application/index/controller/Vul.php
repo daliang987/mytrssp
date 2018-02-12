@@ -3,8 +3,9 @@
 namespace app\index\controller;
 
 use think\Controller;
+use app\common\controller\Common;
 
-class Vul extends Controller{
+class Vul extends Common{
 
 
     public function index(){
