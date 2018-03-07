@@ -142,5 +142,9 @@
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor');
-</script> {/block}
+    require(['hdjs'], function (hdjs) {
+       hdjs.ueditor('editor', {initialFrameHeight:'250','toolbars': [['fullscreen', 'source','insertcode', 'hdimage']]}, function (editor) {
+            console.log(editor)
+        });
+    })
+</script>  {/block}

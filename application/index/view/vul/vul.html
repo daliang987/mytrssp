@@ -17,13 +17,13 @@
                     </li>
                 </ul>
                 <div class="main">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="projectname" class="col-sm-2 col-md-2 control-label">项目名称
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="text" class="form-control" id="projectname" placeholder="请输入项目名称">
+                                <input type="text" name="pro_name" class="form-control" id="projectname" placeholder="请输入项目名称">
                             </div>
                         </div>
                         <div class="form-group">
@@ -32,40 +32,38 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="text" class="form-control" id="vulname" placeholder="请输入漏洞标题">
+                                <input type="text" name="vul_title" class="form-control" id="vulname" placeholder="请输入漏洞标题">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="vulproduct" class="col-sm-2 col-md-2 control-label">所属产品
                                 <span class="text-danger">*</span>
                             </label>
-                            <div class="col-sm-5 col-md-5">
-                                <select id="vulproduct" class="form-control">
-                                    <option value="1">WCM</option>
-                                    <option value="1">WCM</option>
-                                    <option value="1">WCM</option>
-                                    <option value="1">WCM</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-5 col-md-5">
-                                <select name="vultype" class="form-control">
-                                    <option value="1">6.5 14304</option>
-                                    <option value="1">7.0</option>
-                                    <option value="1">6.0 1088</option>
+                            <div class="col-sm-10 col-md-10">
+                                <select id="vulproduct" name="vul_pdt" class="form-control">
+                                    {volist name="_pdt" id="pdt"}
+                                    <option value="{$pdt.pdt_id}">{$pdt.pdt_name}--{$pdt.pdt_version}</option>
+                                    {/volist}
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="vulproduct" class="col-sm-2 col-md-2 control-label">漏洞类型
+                            <label for="vul_type_first" class="col-sm-2 col-md-2 control-label">漏洞类型
                                 <span class="text-danger">*</span>
                             </label>
-                            <div class="col-sm-10 col-md-10">
-                                <select id="vulproduct" class="form-control">
-                                    <option value="1">xss</option>
-                                    <option value="1">csrf</option>
-                                    <option value="1">sql</option>
-                                    <option value="1">upload</option>
+                            <div class="col-sm-5 col-md-5">
+                                <select id="vul_type_first" class="form-control" onchange="gesecond(this.value)">
+                                    <option>选择主类别</option>
+                                    {volist name="type_first" id="f"}
+                                        <option value="{$f.t_first}">{$f.t_first}</option>
+                                    {/volist}
+                                   
+                                </select>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <select id="vul_type_second" name="vultype_id" class="form-control">
+                                    <option value="1">选择子类别</option>
                                 </select>
                             </div>
                         </div>
@@ -75,7 +73,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <select name="" id="vullevel" class="form-control">
+                                <select name="" id="vullevel" name="vul_level" class="form-control">
                                     <option selected disabled>请选择漏洞等级</option>
                                     <option value="1">高危</option>
                                     <option value="2">中危</option>
@@ -88,7 +86,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <textarea class="form-control" rows="5" id="vuldesc" placeholder="请输入漏洞概述，请勿在此输入URL、利用方式、发生场景等具体信息"></textarea>
+                                <textarea class="form-control" name="vul_desc" rows="5" id="vuldesc" placeholder="请输入漏洞概述，请勿在此输入URL、利用方式、发生场景等具体信息"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -96,7 +94,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="text" class="form-control" id="vulpostion" placeholder="请输入漏洞url/位置">
+                                <input type="text" class="form-control" name="vul_url" id="vulpostion" placeholder="请输入漏洞url/位置">
                             </div>
                         </div>
 
@@ -106,14 +104,14 @@
                             </label>
                             <div class="col-sm-10 col-md-10">
 
-                                <textarea id="editor"></textarea>
+                                <textarea name="vul_detail" id="editor"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="vulfile" class="col-sm-2 col-md-2 control-label">附件上传</label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="file" name="" id="vulfile">
+                                <input type="file" name="attach" id="vulfile">
                             </div>
                         </div>
 
@@ -145,5 +143,23 @@
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor');
-</script> {/block}
+    require(['hdjs'], function (hdjs) {
+        hdjs.ueditor('editor', { initialFrameHeight: '250', 'toolbars': [['fullscreen', 'source', 'insertcode', 'hdimage']] }, function (editor) {
+            console.log(editor)
+        });
+    })
+</script> 
+
+<script>
+    function gesecond(value){
+        $("#vul_type_second").html("");
+        $.getJSON("{:url('getsecond')}",{'first':value},function(arr_result){
+            // alert(arr_result);
+			$.each(JSON.parse(arr_result),function(index, content){
+				$("#vul_type_second").append("<option value="+content.tid+">"+content.t_second+"</option>");
+			});
+		});
+    }
+</script>
+
+{/block}

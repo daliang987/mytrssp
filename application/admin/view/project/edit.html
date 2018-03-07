@@ -13,7 +13,7 @@
                     </li>
                 </ul>
                 <div class="main">
-                    <form class="form-horizontal" role="form" method="post">
+                    <form class="form-horizontal" role="form" method="post" action="arcedit">
                         <div class="form-group">
                             <label class="col-sm-2 col-md-2 control-label">所属分公司
                                 <span class="text-danger">*</span>
@@ -21,7 +21,7 @@
                             <div class="col-sm-10 col-md-10">
                                 <select id="vulproduct" name="pro_subcom_id" class="form-control">
                                     {volist name="_subcom" id="subcom"}
-                                    <option value="{$subcom.subcom_id}" {if condition="$subcom.subcom_id=$_pro_data.pro_subcom_id" } selected{/if}>{$subcom.subcom_name}</option>
+                                    <option value="{$subcom.subcom_id}" {if condition="$subcom.subcom_id==$_pro_data.pro_subcom_id" } selected{/if}>{$subcom.subcom_name}</option>
                                     {/volist}
                                 </select>
                             </div>

@@ -1,0 +1,198 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    修改{$curr_cate}
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="main">
+                    <form enctype="multipart/form-data" action="{:url('edit')}" class="form-horizontal" method="post">
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">
+                                    {$curr_cate}标题
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <input type="text" name="arc_title" value="{$pubdata.arc_title}" class="form-control" id="" placeholder="请输入{$curr_cate}标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">{$curr_cate}作者
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <input type="text" name="arc_author" value="{$pubdata.arc_author}" class="form-control" id="" placeholder="请输入{$curr_cate}作者">
+                            </div>
+                        </div>
+                        {switch name="$curr_cate" } {case value="文章"}
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">文章分类
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <select name="cate_id" id="" class="form-control" name="arc_type">
+                                    {volist name="arc_cate" id="cate"}
+                                    <option value="{$cate.cate_id}" {if condition="$cate.cate_id==$vdata.tid"} selected {/if}>{$cate.cate_name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">分类标签
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <div class="checkbox" id="second">
+                                    {volist name="_tag" id="tag"}
+                                    <label>
+                                        <input name="type[]" value="{$tag.tid}" type="checkbox">{$tag.t_second}</label>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                        {/case} {case value="公告"}
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 col-md-2 control-label">所属产品
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <select name="pdt_id" id="" class="form-control">
+                                    {volist name="_product" id="product"}
+                                    <option value="{$product.pdt_id}" {if condition="$product.pdt_id==$pubpdt.pdt_id"} selected {/if}>{$product.pdt_name} 版本:{$product.pdt_version}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        {/case} {default /} {/switch}
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">{$curr_cate}内容
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9 col-md-9">
+                                <textarea id="hdphp" name="arc_content" style="height:300px;width:100%;">
+                                    {$pubdata.arc_content}
+                                </textarea>
+                                <script>
+                                    require(['hdjs'], function (hdjs) {
+                                        hdjs.ueditor('hdphp', {
+                                            autoHeightEnabled: false, toolbars: [
+                                                [
+                                                    'anchor', //锚点
+                                                    'undo', //撤销
+                                                    'redo', //重做
+                                                    'bold', //加粗
+                                                    'indent', //首行缩进
+                                                    'italic', //斜体
+                                                    'underline', //下划线
+                                                    'strikethrough', //删除线
+                                                    'subscript', //下标
+                                                    'fontborder', //字符边框
+                                                    'superscript', //上标
+                                                    'formatmatch', //格式刷
+                                                    'source', //源代码
+                                                    'blockquote', //引用
+                                                    'pasteplain', //纯文本粘贴模式
+                                                    'selectall', //全选
+                                                    'horizontal', //分隔线
+                                                    'removeformat', //清除格式
+                                                    'time', //时间
+                                                    'date', //日期
+                                                    'unlink', //取消链接
+                                                    'insertcode', //代码语言
+                                                    'fontfamily', //字体
+                                                    'fontsize', //字号
+                                                    'paragraph', //段落格式
+                                                    'hdimage', //多图上传
+                                                    'edittable', //表格属性
+                                                    'edittd', //单元格属性
+                                                    'link', //超链接
+                                                    'emotion', //表情
+                                                    'spechars', //特殊字符
+                                                    'searchreplace', //查询替换
+                                                    'map', //Baidu地图
+                                                    'help', //帮助
+                                                    'justifyleft', //居左对齐
+                                                    'justifyright', //居右对齐
+                                                    'justifycenter', //居中对齐
+                                                    'justifyjustify', //两端对齐
+                                                    'forecolor', //字体颜色
+                                                    'backcolor', //背景色
+                                                    'insertorderedlist', //有序列表
+                                                    'insertunorderedlist', //无序列表
+                                                    'fullscreen', //全屏
+                                                    'imagecenter', //居中
+                                                    'wordimage', //图片转存
+                                                    'lineheight', //行间距
+                                                    'edittip ', //编辑提示
+                                                    'autotypeset', //自动排版
+                                                    'touppercase', //字母大写
+                                                    'tolowercase', //字母小写
+                                                    'background', //背景
+                                                    'template', //模板
+                                                    'scrawl', //涂鸦
+                                                    'music', //音乐
+                                                    'inserttable', //插入表格
+                                                    'drafts', // 从草稿箱加载
+                                                    'charts', // 图表
+                                                ]
+                                            ]
+                                        }, function (editor) {
+                                            console.log('编辑器执行后的回调方法2')
+                                        });
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">附件
+                            </label>
+                            
+                            {if condition="$pubdata.attach_name neq ''"}
+                            <a href="{:url('attach',['attach_path'=>$pubdata.attach_name])}">{$pubdata.attach_name}</a>
+                            {else}
+                            <div class="col-md-9">
+                                <input type="file" name="attachment" id="" class="btn" >
+                            </div>
+                            {/if}
+     
+                        </div>
+                        <input type="hidden" name="arc_type" value="{$pubdata.arc_type}">
+                        <input type="hidden" name="arc_id" value="{:input('param.arc_id')}">
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2 col-md-2">
+                                <input type="submit" class="btn btn-danger" value="修改">
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <button type="button" class="btn btn-info">预览文章</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['hdjs']);
+    //上传图片
+    function upFile() {
+        require(['hdjs'], function (hdjs) {
+            var options = {
+                extensions: 'txt,doc,docx,rar,zip,pdf',
+                //data是向后台服务器提交的POST数据
+                data: { name: '后盾人', year: 2099, arc_id: '{$}' },
+                //单个文件允许为5MB
+                fileSingleSizeLimit: 5 * 1024 * 1024
+            };
+            hdjs.file(function (files) {
+                //上传成功的文件，数组类型
+                console.log(files);
+            }, options)
+        });
+    }
+
+</script> {/block}

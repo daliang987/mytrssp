@@ -1,7 +1,7 @@
 {extend name="admin_base" /} {block name="admin_content"}
 
 <div class="alert alert-info">
-    发布安全文章
+    发布{$curr_cate}
 </div>
 
 <div class="row">
@@ -9,22 +9,23 @@
         <div class="panel panel-info">
             <div class="panel-body">
                 <div class="main">
-                    <form class="form-horizontal" method="post" role="form">
+                    <form enctype="multipart/form-data" action="{:url('arcsave')}" class="form-horizontal" method="post">
+
                         <div class="form-group">
                             <label for="" class="col-sm-2 col-md-2 control-label">
-                                文章标题
+                                    {$curr_cate}标题
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9 col-md-9">
-                                <input type="text" name="arc_title" class="form-control" id="" placeholder="请输入文章标题">
+                                <input type="text" name="arc_title" class="form-control" id="" placeholder="请输入{$curr_cate}标题">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 col-md-2 control-label">文章作者
+                            <label for="" class="col-sm-2 col-md-2 control-label">{$curr_cate}作者
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9 col-md-9">
-                                <input type="text" name="arc_author" class="form-control" id="" placeholder="请输入文章作者">
+                                <input type="text" name="arc_author" class="form-control" id="" placeholder="请输入{$curr_cate}作者">
                             </div>
                         </div>
                         {switch name="$curr_cate" } {case value="文章"}
@@ -33,9 +34,9 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9 col-md-9">
-                                <select name="t_first" id="" class="form-control" name="arc_type">
+                                <select name="cate_id" id="" class="form-control" name="arc_type">
                                     {volist name="arc_cate" id="cate"}
-                                    <option value="{$cate.cate_id}">{$cate._cate_name}</option>
+                                    <option value="{$cate.cate_id}">{$cate.cate_name}</option>
                                     {/volist}
                                 </select>
                             </div>
@@ -57,16 +58,16 @@
                             <label for="" class="col-sm-2 col-md-2 control-label">所属产品
                             </label>
                             <div class="col-sm-9 col-md-9">
-                                <select name="" id="" class="form-control">
+                                <select name="pdt_id" id="" class="form-control">
                                     {volist name="_product" id="product"}
-                                    <option value="">{$product.pdt_name}</option>
+                                    <option value="{$product.pdt_id}">{$product.pdt_name} 版本:{$product.pdt_version}</option>
                                     {/volist}
                                 </select>
                             </div>
                         </div>
                         {/case} {default /} {/switch}
                         <div class="form-group">
-                            <label for="editor" class="col-sm-2 col-md-2 control-label">文章内容
+                            <label for="editor" class="col-sm-2 col-md-2 control-label">{$curr_cate}内容
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9 col-md-9">
@@ -142,19 +143,19 @@
                                 </script>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="editor" class="col-sm-2 col-md-2 control-label">附件
-                                <span class="text-danger">*</span>
                             </label>
                             <div class="col-md-9">
-                                <button onclick="upFile(this)" class="btn btn-success" type="button">选择文件</button>
+                                <input type="file" name="attachment" id="" class="btn">
                             </div>
+                           
                         </div>
+                        <input type="hidden" name="cate_id" value="{:input('param.cate_id')}">
                         <hr>
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-2 col-md-2">
-                                <button type="submit" class="btn btn-danger">发布文章</button>
+                                <input type="submit" class="btn btn-danger" value="发布">
                             </div>
                             <div class="col-sm-4 col-md-4">
                                 <button type="button" class="btn btn-info">预览文章</button>
@@ -185,4 +186,5 @@
             }, options)
         });
     }
+
 </script> {/block}

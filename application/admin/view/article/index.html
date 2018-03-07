@@ -24,7 +24,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    {volist name="_cate" id="cate"}
+                    {volist name="_cates" id="cate"}
                     <li>
                         <a href="{:url('article',['cate_id'=>$cate.cate_id])}">{$cate.cate_name}</a>
                     </li>
@@ -46,7 +46,7 @@
             <tr>
                 <td>{$vo.arc_id}</td>
                 <td>{$vo.arc_title}</td>
-                <td>{$vo.t_first}</td>
+                <td>{$vo.cate_name}</td>
                 <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
                 <td>
                     <div class="btn-group col-md-12">
@@ -55,11 +55,11 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{:url('edit',['subcom_id'=>$vo.arc_id])}">编辑</a>
+                                <a href="{:url('edit',['arc_id'=>$vo.arc_id,'arc_type'=>$vo.arc_type])}">编辑</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="javascript:del({$vo.arc_id})">删除</a>
+                                <a href="javascript:del({$vo.arc_id},{$vo.arc_type})">删除</a>
                             </li>
                         </ul>
                     </div>
@@ -72,10 +72,10 @@
     </div>
 </div>
 <script>
-    function del(id) {
+    function del(arc_id,arc_type) {
         require(['hdjs'], function (hdjs) {
             hdjs.confirm('确定删除吗?', function () {
-                location.href = "{:url('del')}"+"?subcom_id=" + id;
+                location.href = "{:url('del')}"+"?arc_id=" + arc_id+"&arc_type="+arc_type;
             });
         });
     }

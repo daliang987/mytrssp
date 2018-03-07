@@ -51,6 +51,10 @@ class Project extends Controller{
 
 
     public function del(){
+        $arc_id=input('get.arc_id');
+        $arc_type=input('get.arc_type');
+
         
+
     }
 }

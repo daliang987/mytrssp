@@ -46,6 +46,8 @@ create table sp_article(
     update_time int unsigned not null default 0,
     create_time int unsigned not null default 0,
     user_id int unsigned not null default 0,
+    attach_name varchar(40) not null default '',
+    attach_path varchar(100) not null default ''
 );
 
 
@@ -79,3 +81,29 @@ create table sp_project(
     pro_url varchar(200) not null default '',
     pro_remark varchar(80) not null default ''
 );
+
+
+create table sp_arc_pdt(
+    arc_id int unsigned not null default 0,
+    pdt_id int unsigned not null default 0
+);
+
+create table sp_vul(
+    vul_id int unsigned auto_increment primary key,
+    pro_name varchar(100) not null default '',
+    vul_title varchar(30) not null default '',
+    pdt_id int unsigned not null default 0,
+    vultype_id int unsigned not null default 0,
+    vul_level varchar(10) not null default '',
+    vul_desc varchar(80) not null default '',
+    vul_url varchar(200) not null default '',
+    vul_detail text,
+    vul_state varchar(10) not null default '',
+    vul_userid int unsigned not null default 0,
+    attach_name varchar(40) not null default '',
+    attach_path varchar(100) not null default '',
+    update_time int unsigned not null default 0,
+    create_time int unsigned not null default 0
+);
+
+
