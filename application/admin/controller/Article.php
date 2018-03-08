@@ -71,12 +71,13 @@ class Article extends Controller{
         $cate_id=input('param.cate_id');
         $data=input('post.');
         $data['arc_type']=$cate_id;
+        $data['uesr_id']=session('session.userid');
         $file=request()->file('attachment');
         if($file){
-            $info	=	$file->move(ROOT_PATH.'public'.DS.'uploads');
+            $data['attach_name']=$file->getInfo('name');
+            $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads');
             if($info){
                 $data['attach_path']=$info->getSaveName();
-                $data['attach_name']=$info->getFilename();
             }else{
                 echo	$file->getError();
             }
@@ -130,16 +131,16 @@ class Article extends Controller{
             $data=input('post.');
             $file=request()->file('attachment');
             if($file){
+                $data['attach_name']=$file->getInfo('name');
                 $arcdata=db('article')->find($arc_id);
                 $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.$arcdata['attach_path'];
                 if(is_file($filepath)){
                     unlink($filepath);
                 }
                 
-                $info	=	$file->move(ROOT_PATH.'public'.DS.'uploads');
+                $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads');
                 if($info){
                     $data['attach_path']=$info->getSaveName();
-                    $data['attach_name']=$info->getFilename();
                 }else{
                     echo $file->getError();
                 }
@@ -158,9 +159,6 @@ class Article extends Controller{
 
 
 
-    public function attach(){ //附件下载
-        
-    }
 
     public function del(){ 
         $arc_id=input('get.arc_id');
@@ -175,4 +173,52 @@ class Article extends Controller{
     }
 
     
+
+    public function downattach(){
+        $arc_id=input('param.id');
+        $arcdata=db('article')->field('attach_name,attach_path')->find($arc_id);
+        $attach_path=$arcdata['attach_path'];
+        $attach_name=$arcdata['attach_name'];
+        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.$attach_path;
+        if (is_file($filepath)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename='.($attach_name ?: basename($filepath)));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+            header('Content-Length: '.filesize($filepath));
+            readfile($filepath);
+        }else{
+            $this->error('无法获取该附件');exit;
+        }
+    }
+    
+    public function view(){
+        $arc_id=input('param.id');
+        $article=db('article')->where('arc_id',$arc_id)->find();
+        $this->assign('article',$article);
+        $arctype=$article['arc_type'];
+        switch($arctype){
+            case 1://公告
+                $pdt_id=db('arc_pdt')->where('arc_id',$arc_id)->value('pdt_id');
+                if($pdt_id){
+                    $pdt_data=db('product')->where('pdt_id',$pdt_id)->select();
+                    $this->assign('pdt_data',$pdt_data);
+                }
+                break;
+            case 2:
+                $tid=db('arc_vtype')->where('arc_id',$arc_id)->value('tid');
+                if($tid){
+                    $vultype_data=db('vultype')->where('tid',$tid)->select();
+                    $this->assign('vultype',$vultype_data);
+                }
+                break;
+            default:
+                break;
+                
+        }
+        return $this->fetch();
+    }
 }

@@ -22,9 +22,9 @@
         //组件目录必须绝对路径(在网站根目录时不用设置)
         window.hdjs.base = '__STATIC__/node_modules/hdjs';
         //上传文件后台地址
-        window.hdjs.uploader = 'test/php/uploader.php?';
+        window.hdjs.uploader = '{:url("index/upload/upload")}'+'?';
         //获取文件列表的后台地址
-        window.hdjs.filesLists = 'test/php/filesLists.php?';
+        window.hdjs.filesLists = '{:url("index/upload/filelist")}'+'?';
     </script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
@@ -113,9 +113,6 @@
                     </li>
                     <li>
                         <a href="{:url('index/vul/vul')}">报告漏洞</a>
-                    </li>
-                    <li>
-                        <a href="{:url('index/vul/draft')}">草稿箱</a>
                     </li>
                     <li class="nav-header">
                         <i class="fa fa-cog fa-fw"></i> 工具扫描</li>

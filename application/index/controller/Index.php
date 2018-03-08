@@ -16,6 +16,10 @@ class Index extends Controller
 
     public function index()
     {
+        $pub=db('article')->where('arc_type','1')->field('arc_id,arc_title,create_time')->order('create_time desc')->limit(5)->select();
+        $this->assign('_pub',$pub);
+        $article=db('article')->where('arc_type','2')->field('arc_id,arc_title,create_time')->order('create_time desc')->limit(5)->select();
+        $this->assign('_article',$article);
         return $this->fetch();
     }
 

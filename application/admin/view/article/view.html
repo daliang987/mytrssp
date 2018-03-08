@@ -1,0 +1,38 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="panel panel-primary">
+    <div class="main">
+        <h3 class="text-info">
+            {$article.arc_title}
+        </h3>
+        <hr>
+        <p>
+            发表时间：
+            <span class="text-info">{:date('Y-m-d H:i',$article.create_time)}</span>&nbsp;&nbsp;&nbsp; 作者：
+            <span class="text-info">{$article.arc_author}</span>
+        </p>
+        <hr>
+        <p>
+            {$article.arc_content}
+        </p>
+        <hr> {if condition="$article.attach_name neq ''"}
+        <p>
+            附件：
+            <a href="{:url('downattach',['id'=>$article.arc_id])}" class="btn">{$article.attach_name}</a>
+        </p>
+        {/if}
+    </div>
+</div>
+
+<div class="func">
+    <a href="javascript:history.back()" class="btn">返回</a>
+    <a id="toTop" onclick="getTop()" class="btn">回到顶部</a>
+</div>
+<script>
+    function getTop() {
+        // alert($('html, body'));
+        $('html body').animate({ scrollTop: 0 }, 'fast');
+    }
+</script>
+
+{/block}

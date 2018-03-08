@@ -1,0 +1,50 @@
+{extend name="user_base" /} {block name="user_content"}
+
+<div class="alert alert-info">
+    当前状态： {$vul_data.vul_state}
+</div>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="main">
+
+            <h3 class="text-info">{$vul_data.vul_title}</h3>
+            <hr>
+            <p>所在项目:
+                <span class="text-info">{$vul_data.pro_name}</span>
+            </p>
+            <p>提交时间
+                <span class="text-info">{:date('Y-m-d H:i',$vul_data.create_time)}</span>
+            </p>
+            <p>
+                所属产品:
+                <span class="text-info">{$pdt_name}</span>
+            </p>
+            <p>
+                漏洞链接：
+                <span class="text-info">{$vul_data.vul_url}</span>
+            </p>
+            <hr>
+            <p>
+                漏洞描述：
+            </p>
+            <p>
+                <span class="text-info">{$vul_data.vul_desc}</span>
+            </p>
+            <hr>
+            <p>
+                漏洞详情：
+            </p>
+            <p>
+                {$vul_data.vul_detail}
+            </p>
+            <hr> {if condition="$vul_data.attach_name neq ''"} 附件：
+            <a href="{:url('downattach',['id'=>$vul_data.vul_id])}">{$vul_data.attach_name}</a>
+            <hr> {/if}
+
+        </div>
+    </div>
+
+</div>
+
+
+{/block}

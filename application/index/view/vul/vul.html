@@ -12,9 +12,6 @@
                     <li class="active">
                         <a href="{:url('vul')}">提交漏洞</a>
                     </li>
-                    <li>
-                        <a href="{:url('event')}">提交事件</a>
-                    </li>
                 </ul>
                 <div class="main">
                     <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
@@ -40,7 +37,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <select id="vulproduct" name="vul_pdt" class="form-control">
+                                <select id="vulproduct" name="pdt_id" class="form-control">
                                     {volist name="_pdt" id="pdt"}
                                     <option value="{$pdt.pdt_id}">{$pdt.pdt_name}--{$pdt.pdt_version}</option>
                                     {/volist}
@@ -73,11 +70,11 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-10 col-md-10">
-                                <select name="" id="vullevel" name="vul_level" class="form-control">
+                                <select name="vul_level" id="vullevel" class="form-control">
                                     <option selected disabled>请选择漏洞等级</option>
-                                    <option value="1">高危</option>
-                                    <option value="2">中危</option>
-                                    <option value="3">低危</option>
+                                    <option value="高危">高危</option>
+                                    <option value="中危">中危</option>
+                                    <option value="低危">低危</option>
                                 </select>
                             </div>
                         </div>
@@ -111,7 +108,7 @@
                         <div class="form-group">
                             <label for="vulfile" class="col-sm-2 col-md-2 control-label">附件上传</label>
                             <div class="col-sm-10 col-md-10">
-                                <input type="file" name="attach" id="vulfile">
+                                <input type="file" name="attach" id="vulfile" class="btn">
                             </div>
                         </div>
 
