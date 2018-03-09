@@ -1,9 +1,10 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
 
-class Project extends Controller{
+use app\common\controller\Admin;
+
+class Project extends Admin{
 
     protected $db;
 

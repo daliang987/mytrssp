@@ -1,8 +1,8 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
+use app\common\controller\Common;
 
-class Upload extends Controller{
+class Upload extends Common{
 
     public function upload(){
         $file = request()->file('file');

@@ -1,7 +1,7 @@
 
 create database TRSSP;
 
-create table sp_user(
+create table sp_user2(
     uid int unsigned auto_increment primary key,
     username varchar(45) not null default '',
     password varchar(32) not null default '',
@@ -11,7 +11,7 @@ create table sp_user(
     job varchar(45) not null default '',
     email varchar(100) not null default '',
     phone varchar(20) not null default '',
-    level tinyint not null default '3' comment '1 管理员 2 高级用户 3普通用户'
+    level tinyint not null default 0 comment '1 管理员 0普通用户'
 );
 
 

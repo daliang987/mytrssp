@@ -2,7 +2,7 @@
 
 namespace app\admin\controller;
 use app\common\controller\Admin;
-use think\Controller;
+use think\Session;
 
 class User extends Admin{
 
@@ -94,6 +94,11 @@ class User extends Admin{
         }else{
             $this->error($res['msg']);exit;
         }
+    }
+
+
+    public function logout(){
+        Session::clear();
     }
 
 }

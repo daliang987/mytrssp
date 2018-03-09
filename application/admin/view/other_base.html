@@ -6,32 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TRS WEB安全平台</title>
-<!--     
+    <!--     
     <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
-    <link rel="stylesheet" href="__STATIC__/css/index.css">
-    <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
     <link href="__STATIC__/css/font-awesome.min.css" rel="stylesheet">
     <script src="__STATIC__/js/jquery.min.js"></script>
     <script src="__STATIC__/js/bootstrap.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script> 
 -->
-
-
     <script>
         window.hdjs = {};
         //组件目录必须绝对路径(在网站根目录时不用设置)
         window.hdjs.base = '__STATIC__/node_modules/hdjs';
         //上传文件后台地址
-        window.hdjs.uploader = '{:url("index/upload/upload")}'+'?';
+        window.hdjs.uploader = '{:url("admin/upload/upload")}' + '?';
         //获取文件列表的后台地址
-        window.hdjs.filesLists = '{:url("index/upload/filelist")}'+'?';
+        window.hdjs.filesLists = '{:url("admin/upload/filelist")}' + '?';
     </script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
-    
+
 </head>
 
 <body>
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,27 +49,25 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{:url('admin/user/index')}">管理后台 </a>
+                    </li>
                     <li class="active">
-                        <a href="{:url('index/user/index')}">个人首页 </a>
-                    </li>
-                    <li>
-                        <a href="{:url('index/fix/index')}">补丁发布公告</a>
-                    </li>
-                    <li>
-                        <a href="#">安全文章</a>
+                        <a href="{:url('admin/vultype/index')}">其他管理</a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                        {if condition="session('session.user_level')=='1'"}
-                        <li>
-    
-                            <a href="{:url('admin/vul/index')}">
-                                <span class="fa fa-cog fa-spin" aria-hidden="true"></span>&nbsp;&nbsp;后台管理</a>
-                        </li>
-                        {/if}
+                    {if condition="session('session.user_level')=='1'"}
+                    <li>
+
+                        <a href="{:url('index/user/index')}">
+                            <span class="fa fa-home fa-fw" aria-hidden="true"></span>&nbsp;&nbsp;返回前台</a>
+                    </li>
+                    {/if}
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{:session('session.username')}
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {:session('session.username')}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -79,14 +75,14 @@
                                 <a href="#">已提交漏洞</a>
                             </li>
                             <li>
-                                <a href="{:url('index/user/index')}">个人中心</a>
+                                <a href="{:url('admin/user/index')}">个人中心</a>
                             </li>
                             <li>
                                 <a href="#">系统通知</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="{:url('index/index/logout')}">退出登录</a>
+                                <a href="{:url('admin/user/logout')}">退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -101,53 +97,62 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-list">
                     <li class="nav-header">
-                        <i class="fa fa-list-alt fa-fw"></i> 项目管理</li>
+                        <i class="fa fa-user fa-fw"></i> 漏洞类型管理</li>
                     <li>
-                        <a href="{:url('index/project/index')}">我的项目</a>
+                        <a href="{:url('admin/vul/index')}">漏洞类型列表</a>
                     </li>
                     <li>
-                        <a href="{:url('index/project/store')}">添加项目</a>
+                        <a href="{:url('admin/vultype/store')}">添加漏洞类型</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 公司组织管理
+                    </li>
+                    <li>
+                        <a href="{:url('admin/subcom/index')}">分公司列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/subcom/store')}">添加公司</a>
+                    </li>
+                    <li class="nav-header">
+                        <i class="fa fa-list-alt fa-fw"></i> 产品管理</li>
+                    <li>
+                        <a href="{:url('admin/product/index')}">产品列表</a>
+                    </li>
+                    <li>
+                        <a href="{:url('admin/product/store')}">添加产品</a>
                     </li>
 
-                    <li class="nav-header">
-                        <i class="fa fa-shield fa-fw"></i> 漏洞管理</li>
-                    <li>
-                        <a href="{:url('index/vul/index')}">我的漏洞</a>
-                    </li>
-                    <li>
-                        <a href="{:url('index/vul/vul')}">报告漏洞</a>
-                    </li>
-                    <li class="nav-header">
-                        <i class="fa fa-cog fa-fw"></i> 工具扫描</li>
-                    <li>
-                        <a href="{:url('index/tool/tool')}">常用工具</a>
-                    </li>
-                    <li>
-                        <a href="{:url('index/tool/scan')}">产品扫描</a>
-                    </li>
-                    <li class="nav-header">
-                        <i class="fa fa-user fa-fw"></i> 个人中心</li>
-                    <li>
-                        <a href="{:url('index/user/profile')}">我的资料</a>
-                    </li>
-                    <li>
-                        <a href="{:url('index/user/pass')}">修改密码</a>
-                    </li>
                 </ul>
             </div>
-            <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
             <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
+                <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
                 <div class="main">
-                    
-                    {block name="user_content"} {/block}
+                    {block name="other_content"} {/block}
                 </div>
             </div>
         </div>
     </div>
 
+    <link rel="stylesheet" href="__STATIC__/css/index.css">
+    <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
 
 </body>
-<link rel="stylesheet" href="__STATIC__/css/index.css">
-<link rel="stylesheet" href="__STATIC__/css/dashboard.css">
+
+<script>
+    window.onload = function () {
+        $(".nav-header").click(function () {
+            // $(".nav-header").nextUntil(".nav-header").slideUp();
+            $(this).nextUntil(".nav-header").slideToggle();
+        });
+
+
+        $("li a").each(function () {
+            if ($(this).attr('href') == location.pathname) {
+                $(this).addClass('active');
+            }
+        });
+    }
+
+</script>
 
 </html>

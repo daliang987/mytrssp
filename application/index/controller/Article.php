@@ -1,8 +1,8 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
+use app\common\controller\Common;
 
-class Article extends Controller{
+class Article extends Common{
     public function index(){
 
         $pub=db('article')->where('arc_type','2')->field('arc_id,arc_title,create_time')->paginate(20);

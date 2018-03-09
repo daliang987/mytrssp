@@ -4,7 +4,6 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\common\controller\Common;
-use houdunwang\file\build\Base;
 
 class Vul extends Common{
 

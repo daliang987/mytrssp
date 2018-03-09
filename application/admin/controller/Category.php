@@ -1,7 +1,8 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
-class Category extends Controller{
+use app\common\controller\Admin;
+
+class Category extends Admin{
     protected $db;
     protected function _initialize(){
         parent::_initialize();

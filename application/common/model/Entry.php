@@ -3,7 +3,8 @@ namespace app\common\model;
 
 use think\Model;
 use think\Loader;
-use \think\Validate;
+use think\Validate;
+
 
 class Entry extends Model{
     
@@ -41,4 +42,5 @@ class Entry extends Model{
         }
 
     }
+
 }

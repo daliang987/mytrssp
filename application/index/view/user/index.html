@@ -51,31 +51,17 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>标题</th>
-                            <th>时间</th>
+                            <th class="col-md-8">标题</th>
+                            <th class="col-md-4">时间</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {volist name="_pub" id="pub"}
                         <tr>
-                            <td>关于wcm 7.0 infogate 跨站脚本安全补丁公告</td>
-                            <td>2018-12-2</td>
+                            <td>{$pub.arc_title}</td>
+                            <td>{:date('Y-m-d H:i',$pub.create_time)}</td>
                         </tr>
-                        <tr>
-                            <td>关于wcm 7.0 infogate 跨站脚本安全补丁公告</td>
-                            <td>2018-12-2</td>
-                        </tr>
-                        <tr>
-                            <td>关于wcm 7.0 infogate 跨站脚本安全补丁公告</td>
-                            <td>2018-12-2</td>
-                        </tr>
-                        <tr>
-                            <td>关于wcm 7.0 infogate 跨站脚本安全补丁公告</td>
-                            <td>2018-12-2</td>
-                        </tr>
-                        <tr>
-                            <td>关于wcm 7.0 infogate 跨站脚本安全补丁公告</td>
-                            <td>2018-12-2</td>
-                        </tr>
+                        {/volist}
                     </tbody>
                 </table>
             </div>

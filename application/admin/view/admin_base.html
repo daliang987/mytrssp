@@ -18,9 +18,9 @@
         //组件目录必须绝对路径(在网站根目录时不用设置)
         window.hdjs.base = '__STATIC__/node_modules/hdjs';
         //上传文件后台地址
-        window.hdjs.uploader = '{:url("admin/upload/upload")}'+'?';
+        window.hdjs.uploader = '{:url("admin/upload/upload")}' + '?';
         //获取文件列表的后台地址
-        window.hdjs.filesLists = '{:url("admin/upload/filelist")}'+'?';
+        window.hdjs.filesLists = '{:url("admin/upload/filelist")}' + '?';
     </script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
@@ -48,26 +48,24 @@
 
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{:url('admin/user/index')}">管理后台 </a>
+                        <a href="{:url('admin/vul/index')}">管理后台 </a>
                     </li>
                     <li>
-                        <a href="{:url('admin/pub/index')}">公告与文章</a>
-                    </li>
-                    <li>
-                        <a href="{:url('admin/other/index')}">其他管理</a>
-                    </li>
-                    <li>
-                        <a href="#">网站管理</a>
+                        <a href="{:url('admin/vultype/index')}">其他管理</a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    {if condition="session('session.user_level')=='1'"}
                     <li>
-                        <a href="{:url('index/vul/vul')}">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;提交安全漏洞</a>
+
+                        <a href="{:url('index/user/index')}">
+                            <span class="fa fa-home fa-fw" aria-hidden="true"></span>&nbsp;&nbsp;返回前台</a>
                     </li>
+                    {/if}
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {:session('session.username')}
@@ -85,7 +83,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="#">退出登录</a>
+                                <a href="{:url('admin/user/logout')}">退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -99,23 +97,13 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-list">
+
                     <li class="nav-header">
-                        <i class="fa fa-user fa-fw"></i> 漏洞类型管理</li>
+                        <i class="fa fa-user fa-fw"></i> 漏洞管理</li>
                     <li>
-                        <a href="{:url('admin/vultype/index')}">漏洞列表</a>
+                        <a href="{:url('admin/vul/index')}">漏洞审核</a>
                     </li>
-                    <li>
-                        <a href="{:url('admin/vultype/store')}">添加漏洞</a>
-                    </li>
-                    <li class="nav-header">
-                        <i class="fa fa-list-alt fa-fw"></i> 公司组织管理
-                    </li>
-                    <li>
-                        <a href="{:url('admin/subcom/index')}">分公司列表</a>
-                    </li>
-                    <li>
-                        <a href="{:url('admin/subcom/store')}">添加公司</a>
-                    </li>
+
 
                     <li class="nav-header">
                         <i class="fa fa-user fa-fw"></i> 用户管理</li>
@@ -134,14 +122,7 @@
                     <li>
                         <a href="{:url('admin/category/index')}">栏目管理</a>
                     </li>
-                    <li class="nav-header">
-                        <i class="fa fa-list-alt fa-fw"></i> 产品管理</li>
-                    <li>
-                        <a href="{:url('admin/product/index')}">产品列表</a>
-                    </li>
-                    <li>
-                        <a href="{:url('admin/product/store')}">添加产品</a>
-                    </li>
+
 
                     <li class="nav-header">
                         <i class="fa fa-list-alt fa-fw"></i> 项目综合管理</li>
@@ -149,14 +130,7 @@
                         <a href="{:url('admin/project/index')}"> 项目列表</a>
                     </li>
 
-                    <li class="nav-header">
-                        <i class="fa fa-shield fa-fw"></i> 应急管理</li>
-                    <li>
-                        <a href="{:url('admin/vul/index')}">漏洞管理</a>
-                    </li>
-                    <li>
-                        <a href="{:url('admin/vul/vul')}">事件列表</a>
-                    </li>
+
                     <li class="nav-header">
                         <i class="fa fa-cog fa-fw"></i> 工具管理</li>
                     <li>

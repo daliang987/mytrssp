@@ -1,8 +1,8 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\common\controller\Admin;
 
-class Upload extends Controller{
+class Upload extends Admin{
 
     public function upload(){
         $file = request()->file('file');

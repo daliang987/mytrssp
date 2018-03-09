@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
+use app\common\controller\Admin;
 
-class Subcom extends Controller{
+class Subcom extends Admin{
 
     protected $db;
 

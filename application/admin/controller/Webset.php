@@ -2,9 +2,9 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
+use app\common\controller\Admin;
 
-class Webset extends Controller{
+class Webset extends Admin{
 
     public function index(){
         return $this->fetch();

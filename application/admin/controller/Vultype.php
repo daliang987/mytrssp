@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
+use app\common\controller\Admin;
 
-class Vultype extends Controller{
+class Vultype extends Admin{
 
     protected $db;
 

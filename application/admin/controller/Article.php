@@ -1,10 +1,10 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
 use think\Request;
+use app\common\controller\Admin;
 
-class Article extends Controller{
+class Article extends Admin{
 
     protected $db;
     
@@ -23,6 +23,11 @@ class Article extends Controller{
 
         $cateData=db('cate')->where('cate_pid','0')->select();
         $this->assign("_cates",$cateData);
+
+        if(request()->isPost()){
+            $arcData=$this->db->search(input('post.'));
+            $this->assign('dataArc',$arcData);
+        }
 
         return $this->fetch();
     }
