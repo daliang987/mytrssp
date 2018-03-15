@@ -17,9 +17,11 @@ class User extends Model
 
     public function search($data){
         if($data['subcom_id']==0){
-            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->where('username','like','%'.$data['username'].'%')->paginate(5);
+            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->where('username','like','%'.$data['username'].'%')->paginate(10);
         }else{
-            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->where('u.subcom_id',$data['subcom_id'])->where('username','like','%'.$data['username'].'%')->paginate(5);
+            $allids=(new \app\common\model\Subcom())->getSon($data['subcom_id']);
+            $allids[]=$data['subcom_id'];
+            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->whereIn('u.subcom_id',$allids)->where('username','like','%'.$data['username'].'%')->paginate(10);
         }
         return $dataUser;
     }

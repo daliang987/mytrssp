@@ -6,7 +6,7 @@
             <img src="__STATIC__/img/xingkong1.jpg" alt="" class="person-header">
         </div>
         <div class="col-md-12">
-            <h5 class="text-center">用户名：王大亮&nbsp;&nbsp;&nbsp;所属公司：北京总部</h5>
+            <h5 class="text-center">用户名：{:session('session.username')}&nbsp;&nbsp;&nbsp;所属公司：{$company}</h5>
         </div>
     </div>
     <div class="col-md-offset-1 col-md-4">
@@ -19,18 +19,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>报告问题</td>
-                    <td>10</td>
+                    <td>漏洞总计</td>
+                    <td>{$sum}</td>
                 </tr>
-                <tr>
-                    <td>已解决问题</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>未解决问题</td>
-                    <td>5</td>
-                </tr>
+                {volist name="vstate" id="vs"}
 
+                <tr>
+                    <td>{$vs.vul_state}</td>
+                    <td>{$vs.cc}</td>
+                </tr>
+                {/volist}
             </tbody>
         </table>
     </div>

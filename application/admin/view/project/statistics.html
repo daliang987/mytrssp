@@ -1,0 +1,70 @@
+{extend name="admin_base" /} {block name="admin_content"}
+
+<div class="alert alert-info">
+    项目统计
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>分公司</th>
+                <th>项目个数</th>
+            </tr>
+            {volist name="parentcom" id='com'}
+            <tr>
+                <td>{$com.name}</td>
+                <td>{$com.count}</td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+    <div class="col-md-6">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+
+<script>
+
+    require(['hdjs'], function (hdjs) {
+        var options = {
+            type: 'bar',
+            data: {
+                labels: {$subcom},
+                datasets: [{
+                    label: '#项目个数',
+                    data: {$count},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(75, 22, 52, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '各区域项目统计'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        };
+        hdjs.chart('#myChart', options);
+    })
+</script> {/block}

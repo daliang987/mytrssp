@@ -30,10 +30,10 @@ class Index extends Controller
             $data=input('post.');
             $res=(new \app\common\model\Entry())->login($data);
             if($res['valid']){
-                if(session('session.level')>=2){
+                if(session('session.user_level')!=1){
                     $this->success($res['msg'],'index/project/index');
                 }else{
-                    $this->success($res['msg'],'admin/project/index');
+                    $this->success($res['msg'],'admin/vul/index');
                 }
             }else{
                 $this->error($res['msg']);exit;

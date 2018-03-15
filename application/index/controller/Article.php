@@ -5,7 +5,16 @@ use app\common\controller\Common;
 class Article extends Common{
     public function index(){
 
-        $pub=db('article')->where('arc_type','2')->field('arc_id,arc_title,create_time')->paginate(20);
+        $catedata=db('cate')->where('cate_pid',2)->select();
+        $this->assign('_cate',$catedata);
+
+        if(input('param.arc_type')){
+            // halt(input('param.arc_type'));
+            $pub=db('article')->alias('a')->join('arc_vtype av','a.arc_id=av.arc_id','left')->where('av.tid',input('param.arc_type'))->field('a.arc_id,arc_title,create_time')->paginate(20);
+        }else{
+            $pub=db('article')->where('arc_type','2')->field('arc_id,arc_title,create_time')->paginate(20);
+        }
+        
         $this->assign('pub',$pub);
 
         return $this->fetch();

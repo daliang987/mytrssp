@@ -7,46 +7,36 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <form class="bs-example bs-example-form" method="post" role="form">
-                    <div class="row">
-                        <label class="col-sm-2 col-md-2 control-label">
-                            状态：
-                        </label>
-                        <div class="col-md-2">
+                <form class="form-inline" method="post">
+                    <div class="form-group col-md-2">
+                        <label for="">状态：</label>
+                        <select class="form-control" name="vul_state" id="">
+                            <option seleted value="全部">全部</option>
+                            <option value="已提交">已提交</option>
+                            <option value="已确认">已确认</option>
+                            <option value="重复">重复</option>
+                            <option value="无效">无效</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">产品：</label>
+                        <select class="form-control" name="pdt_id" id="">
+                            <option seleted value="0">全部</option>
+                            {volist name="pdt" id="_pdt"}
+                            <option value="{$_pdt.pdt_id}">{$_pdt.pdt_name}-{$_pdt.pdt_version}</option>
+                            {/volist}
+                        </select>
 
-                            <select class="form-control" name="vul_state" id="">
-                                <option seleted value="0">全部</option>
-                                <option value="待处理">待处理</option>
-                                <option value="确认">确认</option>
-                                <option value="重复">重复</option>
-                                <option value="无效">无效</option>
-                            </select>
-                        </div>
-                        <label class="col-sm-2 col-md-2 control-label">
-                            产品：
-                        </label>
-                        <div class="col-md-2">
-
-
-                            <select class="form-control" name="vul_state" id="">
-                                <option seleted value="0">全部</option>
-                                <option value="WCM"></option>
-
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">漏洞标题</span>
-                                <input type="text" name="arc_title" class="form-control">
-                                <div class="input-group-btn">
-                                    <input type="submit" value="搜索" class="btn btn-primary">
-                                </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="input-group col-md-10">
+                            <span class="input-group-addon">漏洞标题</span>
+                            <input type="text" name="vul_title" class="form-control">
+                            <div class="input-group-btn">
+                                <input type="submit" value="搜索" class="btn btn-primary">
                             </div>
                         </div>
-
-                        <!-- /input-group -->
                     </div>
-
                 </form>
             </div>
         </div>
@@ -77,6 +67,7 @@
             {/volist}
 
         </table>
+        {$vuldata->render()}
     </div>
 </div>
 

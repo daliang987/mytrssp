@@ -13,8 +13,22 @@ class Project extends Common{
     }
 
     public function index(){
-
+        $dataSubcom=(new \app\common\model\Subcom)->getAll();
+        $this->assign('sub',$dataSubcom);
         $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')->where('pro_subcom_id',session('session.subcom_id'))->paginate(10);
+
+        if(request()->isPost()){
+            $allids=(new \app\common\model\Subcom())->getSon(input('post.subcom_id'));//获取子id集合
+            $allids[]=input('post.subcom_id');//集合中添加自己id
+            if(input('post.pro_name')){
+                $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
+                ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')
+                ->whereIn('subcom_id',$allids)->where('pro_name','like','%'.input('post.pro_name').'%')
+                ->where('pro_subcom_id',session('session.subcom_id'))
+                ->paginate(10);
+            }
+        }
+
         $this->assign('_project',$pro_data);
         return $this->fetch();
     }

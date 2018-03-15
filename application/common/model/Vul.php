@@ -26,5 +26,14 @@ class Vul extends Model{
         }
     }
 
+    public function edit($data){
+        
+        $result=$this->allowfield(true)->save($data,[$this->pk=>$data['vid']]);
+        if($result){
+            return ['valid'=>1,'msg'=>'修改状态成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError];
+        }
+    }
 
 }

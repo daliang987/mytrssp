@@ -3,6 +3,35 @@
 <div class="alert alert-info">
     当前状态： {$vul_data.vul_state}
 </div>
+
+
+<div class="progress progress-striped">
+    <div class="progress-bar" role="progressbar" {switch name=$vul_data.vul_state} {case value="已提交" } aria-valuenow="25" style="width: 25%;"
+        {/case} {case value="确认为漏洞暂时无法解决" } aria-valuenow="50" style="width: 50%;" {/case} {case value="确认为漏洞已给出解决方案" } aria-valuenow="75"
+        style="width: 75%;" {/case} {case value="误报或无效漏洞" } aria-valuenow="100" style="width: 100%;" {/case} {case value="根据方案无法解决"
+        } aria-valuenow="75" style="width: 75%;" {/case} {case value="根据方案可以解决" } aria-valuenow="100" style="width: 100%;" {/case}
+        {default /} {/switch} aria-valuemin="0" aria-valuemax="100">
+        {$vul_data.vul_state}
+    </div>
+</div>
+<form action="{:url('edit')}" method="post" class="form-horizontal">
+    <input type="hidden" name="vid" value={:input( 'param.vid')}>
+
+    <div class="form-group">
+        <!-- <label for="" class="control-label col-md-2">审核漏洞</label> -->
+        <div class="col-md-4">
+            <select name="vul_state" id="" class="form-control">
+                <option value="确认为漏洞暂时无法解决">确认为漏洞暂时无法解决</option>
+                <option value="确认为漏洞已给出解决方案">确认为漏洞已给出解决方案</option>
+                <option value="误报或无效漏洞">误报或无效的漏洞</option>
+            </select>
+        </div>
+        <input type="submit" value="提交" class="btn btn-primary col-md-2">
+    </div>
+
+</form>
+
+
 <div class="panel panel-info">
     <div class="panel-body">
         <div class="main">
@@ -40,11 +69,58 @@
             <hr> {if condition="$vul_data.attach_name neq ''"} 附件：
             <a href="{:url('downattach',['id'=>$vul_data.vul_id])}">{$vul_data.attach_name}</a>
             <hr> {/if}
+            <form action="{:url('addcomment')}" method="post" class="form">
+                <div class="form-group">
+                    <label for="name">评论：</label>
+                    <textarea class="form-control" name="comment_content" rows="3" style="resize:none"></textarea>
+                </div>
+                <input type="hidden" name="vul_id" value="{:input('param.vid')}">
+                <input type="submit" value="发表评论" class="btn btn-primary pull-right">
+            </form>
+
 
         </div>
     </div>
 
 </div>
+<div class="comment-show">
+    {volist name="_comment" id="comment"}
+    <div class="divider"></div>
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="/tp5/public/static/img/header.jpg" alt="...">
+            </a>
+        </div>
+
+        <div class="media-body">
+            <blockquote>
+                <h4 class="media-heading">
+                    <span class="text-info">{$comment.username}:</span>
+                    <small class="pull-right">{:date('Y-m-d H:i:s',$comment.create_time)}</small>
+                </h4>
+
+                {$comment.comment_content}
+                <button class="close" onclick="del('{$comment.c_id}')">&times;</button>
+            </blockquote>
+            
+        </div>
 
 
+    </div>
+    {/volist}
+
+    <div class="divider"></div>
+    {$_comment->render()}
+</div>
+
+<script>
+    function del(id){
+        require(['hdjs'], function (hdjs) {
+            hdjs.confirm('确定删除吗?', function () {
+                location.href = "{:url('delcomment')}"+"?id=" + id;
+            });
+        });
+    }
+</script>
 {/block}

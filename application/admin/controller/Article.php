@@ -116,15 +116,14 @@ class Article extends Admin{
 
             case 2:
                 //获取文章子类
+                
                 $parent_arc=db('cate')->where('cate_name','文章')->find();
                 $mycate=new \app\common\model\Category();
                 $arcCate=$mycate->getSon(db('cate')->select(),$parent_arc['cate_id']);
                 $arcSonCate=db('cate')->whereIn('cate_id',$arcCate)->select();
                 $this->assign("arc_cate",$arcSonCate);
                 $this->assign('pubdata',$pubdata);
-                $detail_type=db('vultype')->distinct(true)->field('tid,t_second')->select();
-                $this->assign('_tag',$detail_type);
-                $vdata=db('arc_vtype')->find($arc_id);
+                $vdata=db('arc_vtype')->where('arc_id',$arc_id)->find();
                 $this->assign('vdata',$vdata);
                 break;
             default:

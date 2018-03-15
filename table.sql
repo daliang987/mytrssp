@@ -98,7 +98,7 @@ create table sp_vul(
     vul_desc varchar(80) not null default '',
     vul_url varchar(200) not null default '',
     vul_detail text,
-    vul_state varchar(10) not null default '',
+    vul_state varchar(20) not null default '',
     vul_userid int unsigned not null default 0,
     attach_name varchar(40) not null default '',
     attach_path varchar(100) not null default '',
@@ -106,4 +106,10 @@ create table sp_vul(
     create_time int unsigned not null default 0
 );
 
-
+create table sp_comment(
+    c_id int unsigned auto_increment primary key,
+    create_time int unsigned not null default 0,
+    user_id int unsigned,
+    vul_id int unsigned,
+    c_content varchar(200) not null default ''
+);

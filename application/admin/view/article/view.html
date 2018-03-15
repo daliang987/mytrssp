@@ -1,7 +1,7 @@
 {extend name="admin_base" /} {block name="admin_content"}
 
 <div class="panel panel-primary">
-    <div class="main">
+    <div class="main" id="main">
         <h3 class="text-info">
             {$article.arc_title}
         </h3>
@@ -31,7 +31,7 @@
 <script>
     function getTop() {
         // alert($('html, body'));
-        $('html body').animate({ scrollTop: 0 }, 'fast');
+        $('.panel').animate({ scrollTop: 0 }, 'fast');
     }
 </script>
 
