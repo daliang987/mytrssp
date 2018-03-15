@@ -1,8 +1,9 @@
 <?php
 namespace app\index\controller;
-use app\common\controller\Common;
+// use app\common\controller\Common;
+use think\Controller;
 
-class Article extends Common{
+class Article extends Controller{
     public function index(){
 
         $catedata=db('cate')->where('cate_pid',2)->select();

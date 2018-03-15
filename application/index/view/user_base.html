@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TRS WEB安全平台</title>
-<!--     
+    <!--     
     <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
     <link rel="stylesheet" href="__STATIC__/css/index.css">
     <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
@@ -22,13 +22,13 @@
         //组件目录必须绝对路径(在网站根目录时不用设置)
         window.hdjs.base = '__STATIC__/node_modules/hdjs';
         //上传文件后台地址
-        window.hdjs.uploader = '{:url("index/upload/upload")}'+'?';
+        window.hdjs.uploader = '{:url("index/upload/upload")}' + '?';
         //获取文件列表的后台地址
-        window.hdjs.filesLists = '{:url("index/upload/filelist")}'+'?';
+        window.hdjs.filesLists = '{:url("index/upload/filelist")}' + '?';
     </script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
     <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
-    
+
 </head>
 
 <body>
@@ -57,26 +57,22 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                        {if condition="session('session.user_level')=='1'"}
-                        <li>
-    
-                            <a href="{:url('admin/vul/index')}">
-                                <span class="fa fa-cog fa-spin" aria-hidden="true"></span>&nbsp;&nbsp;后台管理</a>
-                        </li>
-                        {/if}
+                    {if condition="session('session.user_level')=='1'"}
+                    <li>
+                        <a href="{:url('admin/vul/index')}">
+                            <span class="fa fa-cog fa-spin" aria-hidden="true"></span>&nbsp;&nbsp;后台管理</a>
+                    </li>
+                    {/if}
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{:session('session.username')}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">已提交漏洞</a>
+                                <a href="{:url('index/vul/index')}">已提交漏洞</a>
                             </li>
                             <li>
                                 <a href="{:url('index/user/index')}">个人中心</a>
-                            </li>
-                            <li>
-                                <a href="#">系统通知</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
@@ -132,7 +128,7 @@
             <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
             <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
                 <div class="main">
-                    
+
                     {block name="user_content"} {/block}
                 </div>
             </div>
@@ -143,5 +139,21 @@
 </body>
 <link rel="stylesheet" href="__STATIC__/css/index.css">
 <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
+<script>
+    window.onload = function () {
+        $(".nav-header").click(function () {
+            // $(".nav-header").nextUntil(".nav-header").slideUp();
+            $(this).nextUntil(".nav-header").slideToggle();
+        });
+
+
+        $("li a").each(function () {
+            if ($(this).attr('href') == location.pathname) {
+                $(this).addClass('active');
+            }
+        });
+    }
+
+</script>
 
 </html>

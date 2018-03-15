@@ -51,4 +51,37 @@ class Project extends Common{
         $this->assign('_pdt_data',$pdt_data);
         return $this->fetch();
     }
+
+    public function edit(){
+
+        if(request()->isPost()){
+            $proData=db('project')->where('pro_subcom_id',session('session.subcom_id'))->find(input('post.pro_id'));
+            if($proData){
+                $res=$this->db->edit(input('post.'));
+                if($res['valid']){
+                    $this->success($res['msg'],'index');exit;
+                }else{
+                    $this->error($res['msg']);exit;
+                }
+            }else{
+                $this->error('您没有权限编辑该项目');
+            }
+        }
+
+        $subcomData=(new \app\common\model\Subcom)->getAll();
+        $this->assign('_subcom',$subcomData);
+
+        $pro_id=input('param.pro_id');
+        $proData=db('project')->where('pro_subcom_id',session('session.subcom_id'))->find($pro_id);
+        if($proData){
+            $this->assign('_pro_data',$proData);
+        }else{
+            $this->error('您没有权限编辑该项目');
+        }
+
+        $pdtData=db('product')->select();
+        $this->assign('_pdt_data',$pdtData);
+
+        return $this->fetch();
+    }
 }

@@ -1,4 +1,4 @@
-{extend name="admin_base" /} {block name="admin_content"}
+{extend name="user_base" /} {block name="user_content"}
 <script src="__STATIC__/js/PCASClass.js"></script>
 <div class="alert alert-info">
     修改项目
@@ -68,15 +68,15 @@
                             <div class="col-sm-10 col-md-10">
                                 <select name="pro_level" id="itemproperty" class="form-control">
                                     <option selected disabled>请选择项目性质</option>
-                                    <option value="部委" {if condition="$_pro_data.pro_level=='部委'" }selected{/if}>部委</option>
-                                    <option value="省厅" {if condition="$_pro_data.pro_level=='省厅'" }selected{/if}>省厅</option>
-                                    <option value="市局" {if condition="$_pro_data.pro_level=='市局'" }selected{/if}>市局</option>
-                                    <option value="区县" {if condition="$_pro_data.pro_level=='区县'" }selected{/if}>区县</option>
-                                    <option value="媒体" {if condition="$_pro_data.pro_level=='媒体'" }selected{/if}>媒体</option>
-                                    <option value="教育科研" {if condition="$_pro_data.pro_level=='教育科研'" }selected{/if}>教育科研</option>
-                                    <option value="事业单位" {if condition="$_pro_data.pro_level=='事业单位'" }selected{/if}>事业单位</option>
-                                    <option value="金融" {if condition="$_pro_data.pro_level=='金融'" }selected{/if}>金融</option>
-                                    <option value="其他" {if condition="$_pro_data.pro_level=='其他'" }selected{/if}>其他</option>
+                                    <option value="部委" {if condition="$_pro_data.pro_level=='部委'"}selected{/if}>部委</option>
+                                    <option value="省厅" {if condition="$_pro_data.pro_level=='省厅'"}selected{/if}>省厅</option>
+                                    <option value="市局" {if condition="$_pro_data.pro_level=='市局'"}selected{/if}>市局</option>
+                                    <option value="区县" {if condition="$_pro_data.pro_level=='区县'"}selected{/if}>区县</option>
+                                    <option value="媒体" {if condition="$_pro_data.pro_level=='媒体'"}selected{/if}>媒体</option>
+                                    <option value="教育科研" {if condition="$_pro_data.pro_level=='教育科研'"}selected{/if}>教育科研</option>
+                                    <option value="事业单位" {if condition="$_pro_data.pro_level=='事业单位'"}selected{/if}>事业单位</option>
+                                    <option value="金融" {if condition="$_pro_data.pro_level=='金融'"}selected{/if}>金融</option>
+                                    <option value="其他" {if condition="$_pro_data.pro_level=='其他'"}selected{/if}>其他</option>
                                 </select>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                             </label>
                             <div class="col-sm-2 col-md-2">
                                 <select class="form-control" name="pro_net_type">
-
+                                        
                                     <option {if condition="$_pro_data.pro_net_type=='外网'" }selected{/if} value="外网">外网</option>
                                     <option {if condition="$_pro_data.pro_net_type=='内网'" }selected{/if} value="内网">内网</option>
                                 </select>
