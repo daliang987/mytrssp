@@ -26,10 +26,10 @@
         //获取文件列表的后台地址
         window.hdjs.filesLists = '{:url("index/upload/filelist")}' + '?';
     </script>
-    <script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
-    <script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
 
 </head>
+<script src="__STATIC__/node_modules/hdjs/static/requirejs/require.js"></script>
+<script src="__STATIC__/node_modules/hdjs/static/requirejs/config.js"></script>
 
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -140,7 +140,7 @@
 <link rel="stylesheet" href="__STATIC__/css/index.css">
 <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
 <script>
-    window.onload = function () {
+    require(['hdjs'],function () {
         $(".nav-header").click(function () {
             // $(".nav-header").nextUntil(".nav-header").slideUp();
             $(this).nextUntil(".nav-header").slideToggle();
@@ -152,7 +152,9 @@
                 $(this).addClass('active');
             }
         });
-    }
+
+
+    });
 
 </script>
 

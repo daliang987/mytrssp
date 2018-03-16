@@ -10,14 +10,19 @@
                 <div class="main">
                     <form action="">
                         <div class="col-md-4 text-center">
-                            <div class="thumbnail">
-                                <img src="__STATIC__/img/xingkong1.jpg" alt="头像">
+                            <div class="profile-header">
+                                <img src="__STATIC__/img/xingkong1.jpg" id="user-header" class="person-header" alt="头像">
                                 <div class="caption">
-                                    <input type="file" name="" style="display:none">
-                                    <input type="button" class="btn btn-danger" id="uploadheader" value="上传头像">
+                                    <input type="file" name="" id="up">
                                 </div>
+                                <input type="submit" value="保存图像" id="save-img">
                             </div>
-
+                            <div id="uploader-demo">
+                                <!--用来存放item-->
+                                <div id="fileList" class="uploader-list">
+                                </div>
+                                <div id="filePicker">选择图片</div>
+                            </div>
                         </div>
                     </form>
 
@@ -99,7 +104,6 @@
                                 </div>
                             </div>
                     </div>
-
                     </form>
                 </div>
             </div>
@@ -107,7 +111,48 @@
     </div>
 </div>
 <script>
-    $("#uploadheader").click(function () {
-        $("input[type='file']").click();
-    })
+    require(['hdjs'], function () {
+        var $list = $("#fileList");   //这几个初始化全局的百度文档上没说明，好蛋疼
+        var thumbnailWidth = 200;   //缩略图高度和宽度 （单位是像素），当宽高度是0~1的时候，是按照百分比计算，具体可以看api文档  
+        var thumbnailHeight = 200;
+        var uploader = webuploader.create({
+            // 选完文件后，是否自动上传。
+            auto: true,
+            // swf文件路径
+            swf: '/new/public/static/uploader.swf', //加载swf文件，路径一定要对
+            // 文件接收服务端。
+            server: '{:url("index/index/upload")}',
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/'
+            }
+        });
+        //上传完成事件监听
+        uploader.on('fileQueued', function (file) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '<div class="info">' + file.name + '</div>' +
+                '</div>'
+            ),
+                $img = $li.find('img');
+            // $list为容器jQuery实例
+            $list.append($li);
+            // 创建缩略图
+            // 如果为非图片文件，可以不用调用此方法。
+            // thumbnailWidth x thumbnailHeight 为 100 x 100
+            uploader.makeThumb(file, function (error, src) {
+                if (error) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+                $img.attr('src', src);
+            }, thumbnailWidth, thumbnailHeight);
+        });
+    });
 </script> {/block}
