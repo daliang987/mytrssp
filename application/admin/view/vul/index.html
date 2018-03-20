@@ -51,8 +51,9 @@
                 <tr>
                     <th>提交时间</th>
                     <th>漏洞标题</th>
-                    <th>当前状态</th>
+                    <th>提交者</th>
                     <th>漏洞级别</th>
+                    <th>当前状态</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -61,9 +62,9 @@
                 <tr>
                     <td>{:date('Y-m-d H:i',$vul.create_time)}</td>
                     <td>{$vul.vul_title}</td>
-                    <td>{$vul.vul_state}</td>
+                    <td>{$vul.username}</td>
                     <td>{$vul.vul_level}</td>
-
+                    <td>{$vul.vul_state}</td>
                     <td>
                         <a class="btn btn-primary btn-xs" href="{:url('view',['vid'=>$vul.vul_id])}">查看详情</a>
                     </td>

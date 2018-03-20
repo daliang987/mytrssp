@@ -4,6 +4,7 @@ use think\Db;
 use think\Controller;
 use think\captcha\Captcha;
 use think\Session;
+use think\Cookie;
 
 class Index extends Controller
 {
@@ -56,6 +57,9 @@ class Index extends Controller
     }
 
     public function logout(){
+        Session::delete('PHPSESSID');
+        Cookie::delete('PHPSESSID');
+        Cookie::clear();
         Session::clear();
         $this->redirect('index');
     }

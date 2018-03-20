@@ -11,7 +11,8 @@ create table sp_user2(
     job varchar(45) not null default '',
     email varchar(100) not null default '',
     phone varchar(20) not null default '',
-    level tinyint not null default 0 comment '1 管理员 0普通用户'
+    level tinyint not null default 0 comment '1 管理员 0普通用户',
+    headimg varchar(100) not null default ''
 );
 
 

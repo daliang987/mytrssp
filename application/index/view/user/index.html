@@ -3,10 +3,14 @@
 <div class="row">
     <div class="col-md-offset-1 col-md-4">
         <div class="col-md-12 person">
-            <img src="__STATIC__/img/xingkong1.jpg" alt="" class="person-header">
+                {if condition="$userinfo.headimg neq ''"}
+                <img src="{$userinfo.headimg}" class="person-header img-responsive img-thumbnail" width="200">
+                {else /}
+                <img src="__STATIC__/node_modules/hdjs/dist/static/image/nopic.jpg" class="person-header img-responsive img-thumbnail" width="200">
+                {/if}
         </div>
         <div class="col-md-12">
-            <h5 class="text-center">用户名：{:session('session.username')}&nbsp;&nbsp;&nbsp;所属公司：{$company}</h5>
+            <h5 class="text-center">用户名：{:session('session.username')}&nbsp;&nbsp;&nbsp;所属公司：{$userinfo.subcom_name}</h5>
         </div>
     </div>
     <div class="col-md-offset-1 col-md-4">

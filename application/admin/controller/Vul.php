@@ -13,7 +13,7 @@ class Vul extends Admin{
     }
 
     public function index(){
-        $vul_data=db('vul')->order('create_time','desc')->field('vul_id,create_time,vul_title,vul_state,vul_level')->paginate(10);
+        $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->order('create_time','desc')->field('u.username,vul_id,create_time,vul_title,vul_state,vul_level')->paginate(10);
         
         $pdt_data=db('product')->select();
         $this->assign('pdt',$pdt_data);
@@ -23,15 +23,15 @@ class Vul extends Admin{
 
             if($search['vul_state']=='全部'){
                 if($search['pdt_id']=='0'){
-                    $vul_data=db('vul')->order('create_time','desc')->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
+                    $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->order('create_time','desc')->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
                 }else{
-                    $vul_data=db('vul')->order('create_time','desc')->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
+                    $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->order('create_time','desc')->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
                 }
             }else{
                 if($search['pdt_id']=='0'){
-                    $vul_data=db('vul')->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
+                    $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
                 }else{
-                    $vul_data=db('vul')->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
+                    $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
                 }
             }
         }
@@ -40,19 +40,16 @@ class Vul extends Admin{
         return $this->fetch();
     }
 
-    public function store(){
-        $this->fetch();
-    }
 
     public function view(){
         $vid=input('param.vid');
         
-        $vul_data=db('vul')->where('vul_id',$vid)->find();
+        $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->where('vul_id',$vid)->find();
         if($vul_data){
             $this->assign('vul_data',$vul_data);
             $pdt_name=db('product')->where('pdt_id',$vul_data['pdt_id'])->value('pdt_name');
             $this->assign('pdt_name',$pdt_name);
-            $comment_data=db('comment')->alias('c')->join('user u','c.user_id=u.uid','left')->where('vul_id',$vid)->field('u.username,c.c_id,c.comment_content,c.create_time')->paginate(10);
+            $comment_data=db('comment')->alias('c')->join('user u','c.user_id=u.uid','left')->where('vul_id',$vid)->field('u.username,u.uid,u.headimg,c.c_id,c.comment_content,c.create_time')->paginate(10);
             $this->assign('_comment',$comment_data);
         }else{
             $this->error('无法获取该漏洞数据','index');
@@ -116,5 +113,6 @@ class Vul extends Admin{
             $this->error($res['msg']);
         }
     }
+
 }
 

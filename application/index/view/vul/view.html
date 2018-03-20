@@ -5,42 +5,12 @@
 </div>
 
 <div class="progress progress-striped">
-    <div class="progress-bar" role="progressbar" 
-    {switch name=$vul_data.vul_state}
-    {case value="已提交"}
-    aria-valuenow="25" 
-    style="width: 25%;"
-    {/case}
-
-    {case value="确认为漏洞暂时无法解决"}
-    aria-valuenow="50" 
-    style="width: 50%;"    
-    {/case}
-
-    {case value="确认为漏洞已给出解决方案"}
-    aria-valuenow="75" 
-    style="width: 75%;"    
-    {/case}
-
-    {case value="误报或无效漏洞"}
-    aria-valuenow="100" 
-    style="width: 100%;"
-    {/case}
-
-    {case value="根据方案无法解决"}
-    aria-valuenow="75" 
-    style="width: 75%;"
-    {/case}
-
-    {case value="根据方案可以解决"}
-    aria-valuenow="100" 
-    style="width: 100%;"
-    {/case}
-
-    {default /}
-    {/switch}
-    aria-valuemin="0" aria-valuemax="100">
-            {$vul_data.vul_state}
+    <div class="progress-bar" role="progressbar" {switch name=$vul_data.vul_state} {case value="已提交" } aria-valuenow="25" style="width: 25%;"
+        {/case} {case value="确认为漏洞暂时无法解决" } aria-valuenow="50" style="width: 50%;" {/case} {case value="确认为漏洞已给出解决方案" } aria-valuenow="75"
+        style="width: 75%;" {/case} {case value="误报或无效漏洞" } aria-valuenow="100" style="width: 100%;" {/case} {case value="根据方案无法解决"
+        } aria-valuenow="75" style="width: 75%;" {/case} {case value="根据方案可以解决" } aria-valuenow="100" style="width: 100%;" {/case}
+        {default /} {/switch} aria-valuemin="0" aria-valuemax="100">
+        {$vul_data.vul_state}
     </div>
 </div>
 
@@ -117,9 +87,11 @@
     <div class="divider"></div>
     <div class="media">
         <div class="media-left">
-            <a href="#">
-                <img class="media-object" src="/tp5/public/static/img/header.jpg" alt="...">
-            </a>
+
+            {if condition="$comment.headimg neq ''"}
+            <img class="media-object" src="{$comment.headimg}" alt="..."> {else /}
+            <img class="media-object" src="/tp5/public/static/img/header.jpg" alt="..."> {/if}
+
         </div>
 
         <div class="media-body">

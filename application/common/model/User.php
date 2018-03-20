@@ -85,4 +85,28 @@ class User extends Model
         }
     }
 
+    public function modifyhead($headimg,$user){
+        $result=$this->save(['headimg'=>$headimg],['username'=>$user]);
+        if($result){
+            return ['valid'=>1,'msg'=>'用户头像成功'];
+        }else{
+            return ['valid'=>0,'msg'=>$this->getError()];
+        }
+    }
+
+
+    public function view(){
+        $username=
+        $vulstate=db('vul')->field('count(*) as cc,vul_state')->group('vul_state')->where('vul_userid',session('session.userid'))->select();
+        $this->assign('vstate',$vulstate);
+        $sum=0;
+        foreach($vulstate as $c){
+            $sum+=$c['cc'];
+        }
+        $this->assign('sum',$sum);
+
+        $info=db('user')->alias('u')->join('subcompany s','s.subcom_id=u.subcom_id','left')->where('uid',session('session.userid'))->find();
+        $this->assign('userinfo',$info);
+    }
+
 }

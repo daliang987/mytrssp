@@ -91,7 +91,7 @@ class Vul extends Common{
             $this->assign('vul_data',$vul_data);
             $pdt_name=db('product')->where('pdt_id',$vul_data['pdt_id'])->value('pdt_name');
             $this->assign('pdt_name',$pdt_name); 
-            $comment_data=db('comment')->alias('c')->join('user u','c.user_id=u.uid','left')->where('vul_id',$vid)->field('u.username,c.comment_content,c.create_time')->paginate(10);
+            $comment_data=db('comment')->alias('c')->join('user u','c.user_id=u.uid','left')->where('vul_id',$vid)->field('u.username,u.headimg,c.comment_content,c.create_time')->paginate(10);
             $this->assign('_comment',$comment_data);
         }else{
             $this->error('无法获取该漏洞数据','index');

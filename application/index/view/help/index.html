@@ -1,6 +1,7 @@
 {extend name="index_base" /} {block name="content"}
 
 <div class="container public">
+    <div class="col-md-12">
         <div class="alert alert-info ">
             帮助中心
         </div>
@@ -13,7 +14,7 @@
                             <th class="col-md-4">发布时间</th>
                         </tr>
                         {volist name="pub" id="public"}
-    
+
                         <tr>
                             <td>
                                 <a href="{:url('/index/article/view',['id'=>$public.arc_id])}">{$public.arc_title}</a>
@@ -26,9 +27,9 @@
                 <div class="pull-left">
                     {$pub->render()}
                 </div>
-    
+
             </div>
-    
         </div>
     </div>
+</div>
 {/block}

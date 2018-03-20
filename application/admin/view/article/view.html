@@ -1,7 +1,7 @@
 {extend name="admin_base" /} {block name="admin_content"}
 
 <div class="panel panel-primary">
-    <div class="main" id="main">
+    <div class="main">
         <h3 class="text-info">
             {$article.arc_title}
         </h3>
@@ -29,9 +29,9 @@
     <a id="toTop" onclick="getTop()" class="btn">回到顶部</a>
 </div>
 <script>
+    require(['hdjs']);
     function getTop() {
-        // alert($('html, body'));
-        $('.panel').animate({ scrollTop: 0 }, 'fast');
+       $('.right-show').animate({scrollTop:0},500); 
     }
 </script>
 
