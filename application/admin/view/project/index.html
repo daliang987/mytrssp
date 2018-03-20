@@ -36,45 +36,51 @@
         </div>
         <hr>
         <table class="table table-striped table-bordered table-hover">
-            <tr>
-                <th>编号</th>
-                <th>所属分公司</th>
-                <th>项目名称</th>
-                <th>所属产品</th>
-                <th>URL</th>
-                <th>所在地</th>
-                <th>性质</th>
-                <th>操作</th>
-            </tr>
-            {volist name="_project" id="vo"}
-            <tr>
-                <td>{$vo.pro_id}</td>
-                <td>{$vo.subcom_name}</td>
-                <td>
-                    <a href="{:url('read',['id'=>$vo.pro_id])}">{$vo.pro_name}</a>
-                </td>
-                <td>{$vo.pdt_name}</td>
-                <td>{$vo.pro_url}</td>
-                <td>{$vo.pro_locate_province}</td>
-                <td>{$vo.pro_level}</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">操作
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{:url('edit',['pro_id'=>$vo.pro_id])}">修改</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:del({$vo.pro_id})">删除</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            {/volist}
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>所属分公司</th>
+                    <th>项目名称</th>
+                    <th>所属产品</th>
+                    <th>URL</th>
+                    <th>所在地</th>
+                    <th>性质</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {volist name="_project" id="vo"}
+                <tr>
+                    <td>{$vo.pro_id}</td>
+                    <td>{$vo.subcom_name}</td>
+                    <td>
+                        <a href="{:url('read',['id'=>$vo.pro_id])}">{$vo.pro_name}</a>
+                    </td>
+                    <td>{$vo.pdt_name}</td>
+                    <td>{$vo.pro_url}</td>
+                    <td>{$vo.pro_locate_province}</td>
+                    <td>{$vo.pro_level}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">操作
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{:url('edit',['pro_id'=>$vo.pro_id])}">修改</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:del({$vo.pro_id})">删除</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
         </table>
         {$_project->render()}
     </div>

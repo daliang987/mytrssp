@@ -9,19 +9,23 @@
             <div class="panel-body">
                 <div class="main">
                     <table class="table table-hover">
-                        <tr class="text-info well">
-                            <th class="col-md-8">工具</th>
-                            <th class="col-md-4">发布时间</th>
-                        </tr>
-                        {volist name="pub" id="public"}
+                        <thead>
+                            <tr class="text-info well">
+                                <th class="col-md-8">工具</th>
+                                <th class="col-md-4">发布时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name="pub" id="public"}
 
-                        <tr>
-                            <td>
-                                <a href="{:url('/index/article/view',['id'=>$public.arc_id])}">{$public.arc_title}</a>
-                            </td>
-                            <td>{:date('Y-m-d H:i',$public.create_time)}</td>
-                        </tr>
-                        {/volist}
+                            <tr>
+                                <td>
+                                    <a href="{:url('/index/article/view',['id'=>$public.arc_id])}">{$public.arc_title}</a>
+                                </td>
+                                <td>{:date('Y-m-d H:i',$public.create_time)}</td>
+                            </tr>
+                            {/volist}
+                        </tbody>
                     </table>
                 </div>
                 <div class="pull-left">
