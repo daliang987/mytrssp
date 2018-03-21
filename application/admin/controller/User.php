@@ -72,7 +72,7 @@ class User extends Admin{
     public function pass(){
 
         if(request()->isPost()){
-            $res=$this->db->pass(input('post.'));
+            $res=$this->db->passbyadmin(input('post.'));
             if($res['valid']){
                 $this->success($res['msg'],'index');exit;
             }else{
@@ -95,12 +95,6 @@ class User extends Admin{
             $this->error($res['msg']);exit;
         }
     }
-
-
-    public function logout(){
-        Session::clear();
-    }
-
 
 
     public function view(){

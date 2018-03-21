@@ -124,12 +124,20 @@ class Vul extends Common{
         if(request()->isPost()){
             $data=input('post.');
             $data['user_id']=session('session.userid');
-            $res=(new \app\common\model\Comment())->store($data);
-            if($res['valid']){
-                $this->success($res['msg']);exit;
+            $vul_data=db('vul')->where('vul_userid',session('session.userid'))->find($data['vul_id']);
+            
+            if($vul_data){
+                $res=(new \app\common\model\Comment())->store($data);
+                if($res['valid']){
+                    $this->success($res['msg']);exit;
+                }else{
+                    $this->error($res['msg']);exit;
+                }
             }else{
-                $this->error($res['msg']);exit;
+                $this->error('您没有权限评论该漏洞！');
+                exit;
             }
+
         }
     }
 

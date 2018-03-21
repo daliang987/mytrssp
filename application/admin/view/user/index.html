@@ -51,7 +51,7 @@
                 <tr>
                     <td>{$vo.uid}</td>
                     <td>
-                        {$vo.username}
+                        <a href="{:url('view',['uid'=>$vo.uid])}">{$vo.username}</a>
                     </td>
                     <td>{$vo.realname}</td>
                     <td>{$vo.subcom_name}</td>

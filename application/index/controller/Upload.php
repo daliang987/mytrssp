@@ -16,7 +16,7 @@ class Upload extends Common{
 
         die(json_encode($json));
     }
-
+/*
     public function uploadAttach(){
         $file = request()->file('attachment');
         $info = $file->validate(['size'=>15678,'ext'=>'zip,pdf,doc,docx'])->move(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'attachment');
@@ -29,6 +29,7 @@ class Upload extends Common{
         die(json_encode($json));
     }
 
+*/
     public function filelist(){
         $files=glob(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'img'.DS.date('Ymd').DS.session('session.username').DS.session_id().DS.'*');
         foreach ($files as $f) {

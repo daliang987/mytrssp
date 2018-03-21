@@ -1,8 +1,8 @@
 <?php
 namespace app\index\controller;
-use app\common\controller\Common;
+use think\Controller;
 
-class Fix extends Common{
+class FixIndex extends Controller{
     public function index(){
 
         $pub=db('article')->where('arc_type','1')->field('arc_id,arc_title,create_time')->paginate(20);

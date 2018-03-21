@@ -52,6 +52,25 @@ class User extends Model
         }
     }
 
+    public function passbyadmin($data){
+        $validate=new \app\common\validate\Passbyadmin();
+        if($validate->check($data)){
+            $user=db('user')->where('uid',$data['uid'])->find();
+            if($user){
+                $result=$this->save(['password'=>$data['newpass']],[$this->pk=>$data['uid']]);
+                if($result){
+                    return ['valid'=>1,'msg'=>'密码修改成功'];
+                }else{
+                    return ['valid'=>0,'msg'=>$this->getError()];
+                }
+            }else{
+                return ['valid'=>0,'msg'=>'不存在该用户'];
+            }
+        }else{
+            return ['valid'=>0,'msg'=>$validate->getError()];
+        } 
+    }
+
     public function pass($data){
         $validate=new \app\common\validate\Pass();
         if($validate->check($data)){

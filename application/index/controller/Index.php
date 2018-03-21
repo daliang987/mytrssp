@@ -46,9 +46,10 @@ class Index extends Controller
     public function captcha(){
         $config	=[
             'codeSet'=>'0123456789',
-            'fontSize'=>25,
-            // 'useCurve'=>true,
-            'length'=>3,
+            // 'fontSize'=>14,
+            'useCurve'=>false,
+            'length'=>4,
+            // 'imageH'=>30,
             'reset'=>true,
             'useNoise'=>false,
         ];
@@ -57,8 +58,6 @@ class Index extends Controller
     }
 
     public function logout(){
-        Session::delete('PHPSESSID');
-        Cookie::delete('PHPSESSID');
         Cookie::clear();
         Session::clear();
         $this->redirect('index');
