@@ -6,9 +6,11 @@ class Upload extends Common{
 
     public function upload(){
         $file = request()->file('file');
-        $info = $file->validate(['size'=>5*1024*1024,'ext'=>'jpg,png,gif'])->rule('uniqid')->move(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'img'.DS.date('Ymd').DS.session('session.username').DS.session_id());
+        $username=session('session.username');
+        $salt='trs@123.456';
+        $info = $file->validate(['size'=>5*1024*1024,'ext'=>'jpg,png,gif'])->rule('uniqid')->move(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'img'.DS.$username.DS.substr(sha1($username.$salt),8,16));
         if($info){
-            $json = ['valid' => 1, 'message' =>'/tp5/public/uploads/img/'.date('Ymd').'/'.session('session.username').'/'.session_id().'/'.$info->getSaveName()];
+            $json = ['valid' => 1, 'message' =>'/tp5/public/uploads/img/'.$username.'/'.substr(sha1($username.$salt),8,16).'/'.$info->getSaveName()];
             
         }else{
             $json = ['valid' => 0, 'message' => $file->getError()];
@@ -31,9 +33,11 @@ class Upload extends Common{
 
 */
     public function filelist(){
-        $files=glob(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'img'.DS.date('Ymd').DS.session('session.username').DS.session_id().DS.'*');
+        $username=session('session.username');
+        $salt='trs@123.456';
+        $files=glob(ROOT_PATH . 'public' . DS . 'uploads'.DS . 'img'.DS.DS.$username.DS.substr(sha1($username.$salt),8,16).DS.'*');
         foreach ($files as $f) {
-            $data[] = ['url' => '/tp5/public/uploads/img/'.date('Ymd').'/'.session('session.username').'/'.session_id().DS.'/'.basename($f), 'path' => '/tp5/public/uploads/img/'.date('Ymd').'/'.session('session.username').'/'.session_id().'/'.basename($f)];
+            $data[] = ['url' => '/tp5/public/uploads/img/'.'/'.$username.'/'.substr(sha1($username.$salt),8,16).'/'.basename($f), 'path' => '/tp5/public/uploads/img/'.$username.'/'.substr(sha1($username.$salt),8,16).'/'.basename($f)];
         }
 
         $json = ['valid'=>1,'data' => $data,'page'=>[]];

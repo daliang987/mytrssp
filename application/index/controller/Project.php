@@ -84,4 +84,10 @@ class Project extends Common{
 
         return $this->fetch();
     }
+
+
+    public function view(){
+
+        return $this->fetch();
+    }
 }

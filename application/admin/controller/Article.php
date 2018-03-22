@@ -32,24 +32,6 @@ class Article extends Admin{
         return $this->fetch();
     }
 
-    // public function store(){
-
-    //     if(request()->isPost()){
-    //         $res=$this->db->store(input('post.'));
-    //         if($res['valid']){
-    //             $this->success($res['msg'],'index');exit;
-    //         }else{
-    //             $this->error($res['msg']);exit;
-    //         }
-    //     }
-
-    //     $product=db('product')->disctinct(true)->field('true')->select();
-    //     $this->assign('cate_data',$product);
-
-        
-    //     return $this->fetch();
-    // }
-
 
     public function article(){
 
@@ -74,7 +56,9 @@ class Article extends Admin{
 
     public function arcsave(){
         $cate_id=input('param.cate_id');
+        $detail=input('post.arc_content','',null);
         $data=input('post.');
+        $data['arc_content']=$detail;
         $data['arc_type']=$cate_id;
         $data['uesr_id']=session('session.userid');
         $file=request()->file('attachment');
@@ -132,7 +116,9 @@ class Article extends Admin{
         }
         if(request()->isPost()){
             $arc_id=input('param.arc_id');
+            $detail=input('post.arc_content','',null);
             $data=input('post.');
+            $data['arc_content']=$detail;
             $file=request()->file('attachment');
             if($file){
                 $data['attach_name']=$file->getInfo('name');

@@ -51,7 +51,9 @@ class Vul extends Common{
         $this->assign('type_first',$type_first);
 
         if(request()->isPost()){
+            $detail=input('post.vul_detail','',null);
             $data=input('post.');
+            $data['vul_detail']=$detail;
             $file=request()->file("attach");
             if($file){
                 $data['attach_name']=$file->getinfo('name');
