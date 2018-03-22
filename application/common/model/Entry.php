@@ -38,7 +38,7 @@ class Entry extends Model{
             session('session.user_level',$result['level']);
             return ['valid'=>1,'msg'=>'登录成功'];
         }else{
-            return ['valid'=>0,'msg'=>'登录失败'];
+            return ['valid'=>0,'msg'=>'用户名或密码错误'];
         }
 
     }

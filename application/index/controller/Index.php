@@ -27,14 +27,19 @@ class Index extends Controller
 
     public function login(){
 
+        if(session('session.username')){
+            $this->redirect('index/user/index');
+            exit;
+        }
+
         if(request()->isPost()){
             $data=input('post.');
             $res=(new \app\common\model\Entry())->login($data);
             if($res['valid']){
                 if(session('session.user_level')!=1){
-                    $this->success($res['msg'],'index/project/index');
+                    $this->success($res['msg'],'index/project/index');exit;
                 }else{
-                    $this->success($res['msg'],'admin/vul/index');
+                    $this->success($res['msg'],'admin/vul/index');exit;
                 }
             }else{
                 $this->error($res['msg']);exit;

@@ -60,7 +60,7 @@
                     <tbody>
                         {volist name="_pub" id="pub"}
                         <tr>
-                            <td>{$pub.arc_title}</td>
+                            <td><a href="{:url('index/showarticle/view',['id'=>$pub.arc_id])}">{$pub.arc_title}</a></td>
                             <td>{:date('Y-m-d H:i',$pub.create_time)}</td>
                         </tr>
                         {/volist}
