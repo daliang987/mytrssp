@@ -3,7 +3,7 @@ namespace app\index\controller;
 // use app\common\controller\Common;
 use think\Controller;
 
-class ArticleIndex extends Controller{
+class ShowArticle extends Controller{
     public function index(){
 
         $catedata=db('cate')->where('cate_pid',2)->select();

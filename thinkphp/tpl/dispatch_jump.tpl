@@ -8,12 +8,14 @@
         *{ padding: 0; margin: 0; }
         body{ background: #fff; font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif; color: #333; font-size: 16px; }
         .system-message{ padding: 24px 48px; text-align:center}
-        .system-message h3{ font-size: 40px; font-weight: normal; line-height: 80px; margin-bottom: 12px;color:#31708f }
+        .system-message h3{ font-size: 50px; font-weight: normal; line-height: 80px; margin-bottom: 12px;color:#31708f }
         .system-message .jump{ padding-top: 10px; }
         .system-message .jump a{ color: #333; }
-        .system-message .success,.system-message .error{ line-height: 1.8em; font-size: 18px; }
+        .system-message .success{line-height: 1.8em;font-size:24px; color:#31708f}
+        .system-message .error{ line-height: 1.8em; font-size: 24px; }
         .system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display: none; }
         .system-message hr{margin:15px 0px;}
+        .danger {color:#d43f3a}
     </style>
 </head>
 <body>
@@ -25,7 +27,7 @@
             <?php break;?>
             <?php case 0:?>
             <h3>(︶︹︺)</h3>
-            <p class="error"><?php echo(strip_tags($msg));?></p>
+            <p class="error danger"><?php echo(strip_tags($msg));?></p>
             <?php break;?>
         <?php } ?>
         <p class="detail"></p>

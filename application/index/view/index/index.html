@@ -39,7 +39,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="col-md-12">
-                            <a href="{:url('index/fix/index')}" class="btn btn-link link-more">更多..</a>
+                            <a href="{:url('index/showfix/index')}" class="btn btn-link link-more">更多..</a>
                         </div>
 
                         <table class="table table-hover table-condensed">
@@ -49,7 +49,7 @@
                             </tr> -->
                             {volist name="_pub" id="pub"}
                             <tr>
-                                <td><a href="{:url('index/article/view',['id'=>$pub.arc_id])}">{$pub.arc_title}</a> </td>
+                                <td><a href="{:url('index/showarticle/view',['id'=>$pub.arc_id])}">{$pub.arc_title}</a> </td>
                                 <td>{:date('Y-m-d H:i',$pub.create_time)}</td>
                             </tr>
                             {/volist}
@@ -72,7 +72,7 @@
                     <div class="panel-body">
 
                         <div class="col-md-12">
-                            <a href="{:url('index/article/index')}" class="btn btn-link link-more">更多..</a>
+                            <a href="{:url('index/showarticle/index')}" class="btn btn-link link-more">更多..</a>
                         </div>
 
                         <table class="table table-hover table-condensed">
@@ -82,7 +82,7 @@
                             </tr> -->
                             {volist name="_article" id="article"}
                             <tr>
-                                <td><a href="{:url('index/article/view',['id'=>$article.arc_id])}">{$article.arc_title}</a></td>
+                                <td><a href="{:url('index/showarticle/view',['id'=>$article.arc_id])}">{$article.arc_title}</a></td>
                                 <td>{:date('Y-m-d H:i',$article.create_time)}</td>
                             </tr>
                             {/volist}
