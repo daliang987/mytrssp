@@ -161,7 +161,8 @@ class Article extends Model{
             $dataArc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->where('a.arc_title','like','%'.$data['arc_title'].'%')->order('create_time desc')->paginate(10);
         }else{
             // halt($data['arc_type']);
-            $dataArc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->where('a.arc_type',$data['arc_type'])->where('a.arc_title','like','%'.$data['arc_title'].'%')->order('create_time desc')->paginate(10);
+            $dataArc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->where('a.arc_type',$data['arc_type'])->where('a.arc_title','like','%'.$data['arc_title'].'%')->order('create_time desc')->paginate(2);
+            // halt($dataArc);
         }
         return $dataArc;
     }

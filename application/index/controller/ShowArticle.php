@@ -26,6 +26,9 @@ class ShowArticle extends Controller{
         $article=db('article')->where('arc_id',$arc_id)->find();
         $this->assign('article',$article);
         $arctype=$article['arc_type'];
+        if($arctype=='3'){ //工具类文章禁止访问
+            $this->error('无法浏览该文章');exit;
+        }
         switch($arctype){
             case 1://公告
                 $pdt_id=db('arc_pdt')->where('arc_id',$arc_id)->value('pdt_id');
@@ -34,7 +37,7 @@ class ShowArticle extends Controller{
                     $this->assign('pdt_data',$pdt_data);
                 }
                 break;
-            case 2:
+            case 2://文章
                 $tid=db('arc_vtype')->where('arc_id',$arc_id)->value('tid');
                 if($tid){
                     $vultype_data=db('vultype')->where('tid',$tid)->select();
@@ -50,7 +53,11 @@ class ShowArticle extends Controller{
 
     public function downattach(){
         $arc_id=input('param.id');
-        $arcdata=db('article')->field('attach_name,attach_path')->find($arc_id);
+        $arcdata=db('article')->field('attach_name,attach_path,arc_type')->find($arc_id);
+        // halt($arcdata['arc_type']);
+        if($arcdata['arc_type']=='3'){ //工具类文章禁止访问
+            $this->error('无法下载附件');exit;
+        }
         $attach_path=$arcdata['attach_path'];
         $attach_name=$arcdata['attach_name'];
         $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.'attach'.DS.$attach_path;
