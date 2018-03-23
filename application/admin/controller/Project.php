@@ -18,7 +18,7 @@ class Project extends Admin{
         $this->assign('sub',$dataSubcom);
         $pro_data=db('project')->alias('pro')
         ->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
-        ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')->paginate(10);
+        ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')->order('pro.pro_id desc')->paginate(10);
        
 
         if(request()->isPost()){
@@ -28,7 +28,7 @@ class Project extends Admin{
                 $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
                 ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')
                 ->whereIn('subcom_id',$allids)->where('pro_name','like','%'.input('post.pro_name').'%')
-                ->paginate(10);
+                ->order('pro.pro_id desc')->paginate(10);
             }
             
         }
@@ -96,6 +96,13 @@ class Project extends Admin{
 
         $this->assign('parentcom',$parentcom);
 
+        return $this->fetch();
+    }
+
+    public function view(){
+        $proid=input('param.id');
+        $prodata=db('project')->alias('pro')->join('subcompany s','pro.pro_subcom_id=s.subcom_id','left')->join('product pdt','pdt.pdt_id=pro.pro_product_id','left')->find($proid);
+        $this->assign('_pro',$prodata);
         return $this->fetch();
     }
 

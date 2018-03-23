@@ -26,7 +26,8 @@
                 <option value="误报或无效漏洞">误报或无效的漏洞</option>
             </select>
         </div>
-        <input type="submit" value="提交" class="btn btn-primary col-md-2">
+        <input type="submit" value="提交" class="btn btn-primary col-md-1">
+        <button class="btn btn-danger col-md-offset-1 col-md-1" onclick="javascript:history.back()">返回</button>
     </div>
 
 </form>
@@ -36,53 +37,90 @@
     <div class="panel-body">
         <div class="main">
 
-            <h3 class="text-info">{$vul_data.vul_title} &nbsp;&nbsp;<small>提交者：{$vul_data.username}</small></h3>
+            <h3 class="text-info">{$vul_data.vul_title} &nbsp;&nbsp;
+                <small>提交者：{$vul_data.username}</small>
+            </h3>
             <hr>
-            <p>所在项目:
-                <span class="text-info">{$vul_data.pro_name}</span>
-            </p>
-            <p>提交时间
-                <span class="text-info">{:date('Y-m-d H:i',$vul_data.create_time)}</span>
-            </p>
-            <p>
-                所属产品:
-                <span class="text-info">{$pdt_name}</span>
-            </p>
-            <p>
-                漏洞链接：
-                <span class="text-info">{$vul_data.vul_url}</span>
-            </p>
-            <hr>
-            <p>
-                漏洞描述：
-            </p>
-            <p>
-                <span class="text-info">{$vul_data.vul_desc}</span>
-            </p>
-            <hr>
-            <p>
-                漏洞详情：
-            </p>
-            <p>
-                {$vul_data.vul_detail}
-            </p>
-            <hr> {if condition="$vul_data.attach_name neq ''"} 附件：
-            <a href="{:url('downattach',['id'=>$vul_data.vul_id])}">{$vul_data.attach_name}</a>
-            <hr> {/if}
-            <form action="{:url('addcomment')}" method="post" class="form">
-                <div class="form-group">
-                    <label for="name">评论：</label>
-                    <textarea class="form-control" name="comment_content" rows="3" style="resize:none"></textarea>
-                </div>
-                <input type="hidden" name="vul_id" value="{:input('param.vid')}">
-                <input type="submit" value="发表评论" class="btn btn-primary pull-right">
-            </form>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            所在项目：
+                        </div>
+                        <div class="col-md-10">
+                            <span class="text-info">{$vul_data.pro_name}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            提交时间：
+                        </div>
+                        <div class="col-md-10">
+                            <span class="text-info">{:date('Y-m-d H:i',$vul_data.create_time)}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            所属产品：
+                        </div>
+                        <div class="col-md-10">
+                            <span class="text-info">{$pdt.pdt_name} {$pdt.pdt_version}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-2">
+                            漏洞链接：
+                        </div>
+                        <div class="col-md-10">
+                            <a href="{$vul_data.vul_url}" target="_blank">
+                                <span class="text-info">{$vul_data.vul_url}</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
 
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>
+                        漏洞描述：
+                    </p>
+                    <p>
+                        <span class="text-info">{$vul_data.vul_desc}</span>
+                    </p>
+                    <hr>
+                    <p>
+                        漏洞详情：
+                    </p>
+                    <p>
+                        {$vul_data.vul_detail}
+                    </p>
+                    <hr> {if condition="$vul_data.attach_name neq ''"} 附件：
+                    <a href="{:url('downattach',['id'=>$vul_data.vul_id])}">{$vul_data.attach_name}</a>
+                    <hr> {/if}
+                </div>
+            </div>
 
         </div>
-    </div>
+        <form action="{:url('addcomment')}" method="post" class="form">
+            <div class="form-group">
+                <label for="name">评论：</label>
+                <textarea class="form-control" name="comment_content" rows="3" style="resize:none"></textarea>
+            </div>
+            <input type="hidden" name="vul_id" value="{:input('param.vid')}">
+            <input type="submit" value="发表评论" class="btn btn-primary pull-right">
+        </form>
 
+
+    </div>
 </div>
+
 <div class="comment-show">
     {volist name="_comment" id="comment"}
     <div class="divider"></div>
@@ -91,7 +129,7 @@
             <a href="{:url('admin/user/view',['uid'=>$comment.uid])}">
                 {if condition="$comment.headimg neq ''"}
                 <img class="media-object" src="{$comment.headimg}" alt="..."> {else /}
-                <img class="media-object" src="/tp5/public/static/img/header.jpg" alt="..."> {/if}
+                <img class="media-object" src="/__STATIC__/img/header.jpg" alt="..."> {/if}
             </a>
         </div>
 

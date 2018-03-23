@@ -3,125 +3,93 @@
 <div class="alert alert-info">
     查看用户
 </div>
-<div class="row">
-    <div class="col-md-offset-1 col-md-4">
-        <div class="col-md-12 person">
-            {if condition="$user.headimg neq ''"}
-            <img src="{$user.headimg}" class="person-header img-responsive img-thumbnail" width="200"> {else /}
-            <img src="__STATIC__/node_modules/hdjs/dist/static/image/nopic.jpg" class="person-header img-responsive img-thumbnail" width="200"> {/if}
-        </div>
-        <div class="col-md-12">
-            <h5 class="text-center">用户名：{$user.username}&nbsp;&nbsp;&nbsp;所属公司：{$user.subcom_name}</h5>
-        </div>
-    </div>
-    <div class="col-md-offset-1 col-md-4">
-        <table class="table table-hover table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>安全问题</th>
-                    <th>统计</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>漏洞总计</td>
-                    <td>{$sum}</td>
-                </tr>
-                {volist name="vstate" id="vs"}
-
-                <tr>
-                    <td>{$vs.vul_state}</td>
-                    <td>{$vs.cc}</td>
-                </tr>
-                {/volist}
-            </tbody>
-        </table>
-    </div>
-
-</div>
 <div class="panel panel-info">
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-offset-2 col-md-7">
-                <form class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <label for="realname" class="col-sm-3 col-md-3 control-label">
-                            真实姓名
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <input type="text" class="form-control" name="realname" value="{$user.realname}" id="realname" placeholder="真实姓名">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="subcompany" class="col-sm-3 col-md-3 control-label">
-                            所属分公司
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <select name="subcom_id" id="subcompany" class="form-control">
-                                {volist name="sub" id="vo"}
-                                <option value="{$vo.subcom_id}" {if condition="$user.subcom_id==$vo.subcom_id" }selected{/if}>{$vo._subcom_name}</option>
-                                {/volist}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="department" class="col-sm-3 col-md-3 control-label">
-                            所属部门
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <input type="text" class="form-control" name="department" value="{$user.department}" id="department" placeholder="所属部门">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="job" class="col-sm-3 col-md-3 control-label">
-                            职位
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <input type="text" class="form-control" value="{$user.job}" name="job" id="job" placeholder="职位">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="col-sm-3 col-md-3 control-label">
-                            邮箱
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <input type="text" class="form-control" name="email" value="{$user.email}" id="email" placeholder="邮箱">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="col-sm-3 col-md-3 control-label">
-                            电话
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <input type="text" class="form-control" name="phone" value="{$user.phone}" id="phone" placeholder="电话">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="level" class="col-sm-3 col-md-3 control-label">
-                            用户级别
-                            <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-sm-8 col-md-8">
-                            <select name="level" id="level" class="form-control">
-                                <option value="0" {if condition="$user.level==0" }selected{/if}>普通用户</option>
-                                <option value="1" {if condition="$user.level==1" }selected{/if}>管理员</option>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="hidden" name="uid" value="{$user.uid}">
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-md-offset-3 col-sm-8 col-md-8">
-                            <button class="form-control btn btn-danger" onclick="javascript:history.back()">返回</button>
-                        </div>
-                    </div>
+            <div class="col-md-offset-1 col-md-4">
+                <div class="col-md-12 person">
+                    {if condition="$user.headimg neq ''"}
+                    <img src="{$user.headimg}" class="person-header img-responsive img-thumbnail" width="200"> {else /}
+                    <img src="__STATIC__/img/header.jpg" class="person-header img-responsive img-thumbnail" width="200"> {/if}
+                </div>
+                <div class="col-md-12">
+                    <h5 class="text-center">用户名：{$user.username}&nbsp;&nbsp;&nbsp;所属公司：{$user.subcom_name}</h5>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-4">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>安全问题</th>
+                            <th>统计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>漏洞总计</td>
+                            <td>{$sum}</td>
+                        </tr>
+                        {volist name="vstate" id="vs"}
+
+                        <tr>
+                            <td>{$vs.vul_state}</td>
+                            <td>{$vs.cc}</td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+<hr>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">真实姓名：</div>
+            <div class="col-md-10">{$user.realname}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">所属分公司：</div>
+            <div class="col-md-10">{$user.subcom_name}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">所属部门：</div>
+            <div class="col-md-10">{$user.department}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">职位：</div>
+            <div class="col-md-10">{$user.job}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">电话：</div>
+            <div class="col-md-10">{$user.phone}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">邮箱：</div>
+            <div class="col-md-10">{$user.email}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-2">用户级别：</div>
+            <div class="col-md-10">{if condition="$user.level=='1'"}管理员{else /}普通用户{/if}</div>
+        </div>
+    </li>
+
+</ul>
+<button class="btn btn-danger" onclick="javascript:history.back()">返回</button>
+
+
 {/block}

@@ -64,7 +64,7 @@ class Article extends Admin{
         $file=request()->file('attachment');
         if($file){
             $data['attach_name']=$file->getInfo('name');
-            $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads');
+            $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads'.DS.'attach');
             if($info){
                 $data['attach_path']=$info->getSaveName();
             }else{
@@ -128,7 +128,7 @@ class Article extends Admin{
                     unlink($filepath);
                 }
                 
-                $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads');
+                $info	=	$file->validate(['size'=>5*1024*1024,'ext'=>'zip,rar,docx,doc,pdf'])->move(ROOT_PATH.'public'.DS.'uploads'.DS.'attach');
                 if($info){
                     $data['attach_path']=$info->getSaveName();
                 }else{
@@ -169,7 +169,7 @@ class Article extends Admin{
         $arcdata=db('article')->field('attach_name,attach_path')->find($arc_id);
         $attach_path=$arcdata['attach_path'];
         $attach_name=$arcdata['attach_name'];
-        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.$attach_path;
+        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.'attach'.DS.$attach_path;
         if (is_file($filepath)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');

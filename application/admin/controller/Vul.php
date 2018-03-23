@@ -47,8 +47,8 @@ class Vul extends Admin{
         $vul_data=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->where('vul_id',$vid)->find();
         if($vul_data){
             $this->assign('vul_data',$vul_data);
-            $pdt_name=db('product')->where('pdt_id',$vul_data['pdt_id'])->value('pdt_name');
-            $this->assign('pdt_name',$pdt_name);
+            $pdt=db('product')->where('pdt_id',$vul_data['pdt_id'])->find();
+            $this->assign('pdt',$pdt);
             $comment_data=db('comment')->alias('c')->join('user u','c.user_id=u.uid','left')->where('vul_id',$vid)->field('u.username,u.uid,u.headimg,c.c_id,c.comment_content,c.create_time')->paginate(10);
             $this->assign('_comment',$comment_data);
         }else{
@@ -62,7 +62,7 @@ class Vul extends Admin{
         $vuldata=db('vul')->field('attach_name,attach_path')->where('vul_userid',session('session.userid'))->find($vul_id);
         $attach_path=$vuldata['attach_path'];
         $attach_name=$vuldata['attach_name'];
-        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.$attach_path;
+        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.'attach'.DS.$attach_path;
         if (is_file($filepath)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');

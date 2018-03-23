@@ -87,7 +87,12 @@ class Project extends Common{
 
 
     public function view(){
-
+        $proid=input('param.id');
+        $prodata=db('project')->alias('pro')
+        ->join('subcompany s','pro.pro_subcom_id=s.subcom_id','left')
+        ->join('product pdt','pdt.pdt_id=pro.pro_product_id','left')
+        ->where('pro.pro_subcom_id',session('session.subcom_id'))->find($proid);
+        $this->assign('_pro',$prodata);
         return $this->fetch();
     }
 }

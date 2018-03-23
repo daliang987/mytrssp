@@ -53,7 +53,7 @@ class ShowArticle extends Controller{
         $arcdata=db('article')->field('attach_name,attach_path')->find($arc_id);
         $attach_path=$arcdata['attach_path'];
         $attach_name=$arcdata['attach_name'];
-        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.$attach_path;
+        $filepath=ROOT_PATH.'public'.DS.'uploads'.DS.'attach'.DS.$attach_path;
         if (is_file($filepath)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');

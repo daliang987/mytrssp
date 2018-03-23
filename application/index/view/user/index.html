@@ -1,43 +1,46 @@
 {extend name="user_base" /} {block name="user_content"}
 <div class="alert alert-info">您好，欢迎来到安全平台！</div>
-<div class="row">
-    <div class="col-md-offset-1 col-md-4">
-        <div class="col-md-12 person">
-                {if condition="$userinfo.headimg neq ''"}
-                <img src="{$userinfo.headimg}" class="person-header img-responsive img-thumbnail" width="200">
-                {else /}
-                <img src="__STATIC__/img/header.jpg" class="person-header img-responsive img-thumbnail" width="200">
-                {/if}
-        </div>
-        <div class="col-md-12">
-            <h5 class="text-center">用户名：{:session('session.username')}&nbsp;&nbsp;&nbsp;所属公司：{$userinfo.subcom_name}</h5>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-4">
+                <div class="col-md-12 person">
+                    {if condition="$userinfo.headimg neq ''"}
+                    <img src="{$userinfo.headimg}" class="person-header img-responsive img-thumbnail" width="200"> {else /}
+                    <img src="__STATIC__/img/header.jpg" class="person-header img-responsive img-thumbnail" width="200"> {/if}
+                </div>
+                <div class="col-md-12">
+                    <h5 class="text-center">用户名：{:session('session.username')}&nbsp;&nbsp;&nbsp;所属公司：{$userinfo.subcom_name}</h5>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-4">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>安全问题</th>
+                            <th>统计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>漏洞总计</td>
+                            <td>{$sum}</td>
+                        </tr>
+                        {volist name="vstate" id="vs"}
+
+                        <tr>
+                            <td>{$vs.vul_state}</td>
+                            <td>{$vs.cc}</td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
-    <div class="col-md-offset-1 col-md-4">
-        <table class="table table-hover table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>安全问题</th>
-                    <th>统计</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>漏洞总计</td>
-                    <td>{$sum}</td>
-                </tr>
-                {volist name="vstate" id="vs"}
-
-                <tr>
-                    <td>{$vs.vul_state}</td>
-                    <td>{$vs.cc}</td>
-                </tr>
-                {/volist}
-            </tbody>
-        </table>
-    </div>
-
 </div>
+
 <hr>
 
 <div class="row">
@@ -60,7 +63,9 @@
                     <tbody>
                         {volist name="_pub" id="pub"}
                         <tr>
-                            <td><a href="{:url('index/showarticle/view',['id'=>$pub.arc_id])}">{$pub.arc_title}</a></td>
+                            <td>
+                                <a href="{:url('index/showarticle/view',['id'=>$pub.arc_id])}">{$pub.arc_title}</a>
+                            </td>
                             <td>{:date('Y-m-d H:i',$pub.create_time)}</td>
                         </tr>
                         {/volist}
