@@ -8,20 +8,20 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-10">
-                <form class="bs-example bs-example-form" method="post" role="form">
+                <form class="bs-example bs-example-form" method="get" role="form">
                     <div class="row">
                         <div class="col-md-4">
                             <select class="form-control" name="subcom_id" id="">
                                 <option seleted value="0">全部</option>
                                 {volist name="sub" id="subcom"}
-                                <option value="{$subcom.subcom_id}">{$subcom._subcom_name}</option>
+                                <option value="{$subcom.subcom_id}" {if condition="$_subcom eq $subcom.subcom_id"} selected {/if}>{$subcom._subcom_name}</option>
                                 {/volist}
                             </select>
                         </div>
                         <div class="col-md-8">
                             <div class="input-group">
                                 <span class="input-group-addon">项目名称</span>
-                                <input type="text" name="pro_name" class="form-control">
+                                <input type="text" name="pro_name" value="{$_pro_name}" onfocus="$(this).select()" class="form-control">
                                 <div class="input-group-btn">
                                     <input type="submit" value="搜索" class="btn btn-primary">
                                 </div>

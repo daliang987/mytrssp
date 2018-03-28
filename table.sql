@@ -61,7 +61,8 @@ create table sp_vultype(
 
 create table sp_arc_vtype(
     arc_id int unsigned,
-    tid int unsigned 
+    tid int unsigned,
+    primary key(arc_id,tid) 
 );
 
 create table sp_attachment(
@@ -86,7 +87,8 @@ create table sp_project(
 
 create table sp_arc_pdt(
     arc_id int unsigned not null default 0,
-    pdt_id int unsigned not null default 0
+    pdt_id int unsigned not null default 0,
+    primary key(arc_id,pdt_id)
 );
 
 create table sp_vul(

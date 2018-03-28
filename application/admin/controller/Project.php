@@ -14,26 +14,42 @@ class Project extends Admin{
     }
 
     public function index(){
-        $dataSubcom=(new \app\common\model\Subcom)->getAll();
-        $this->assign('sub',$dataSubcom);
-        $pro_data=db('project')->alias('pro')
-        ->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
-        ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')->order('pro.pro_id desc')->paginate(10);
-       
 
-        if(request()->isPost()){
-            $allids=(new \app\common\model\Subcom())->getSon(input('post.subcom_id'));//获取子id集合
-            $allids[]=input('post.subcom_id');//集合中添加自己id
-            if(input('post.pro_name')){
-                $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
-                ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')
-                ->whereIn('subcom_id',$allids)->where('pro_name','like','%'.input('post.pro_name').'%')
-                ->order('pro.pro_id desc')->paginate(10);
-            }
-            
+        $subcom_id=input('get.subcom_id')?input('get.subcom_id'):0;
+        $pro_name=input('get.pro_name');
+
+        $this->assign('_subcom',$subcom_id);
+        $this->assign('_pro_name','');
+
+        $pageParam=['query'=>[]];
+        
+        $pro=db('project')->alias('pro')
+        ->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
+        ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')->order('pro.pro_id desc');
+        
+        //多级分类，subcom_id在为0（全部）或非0（有分类）的情况下都要获取，
+        //非多级分类的话，可判断是否为0来控制where条件，详情漏洞Vul搜索功能
+
+        $allids=(new \app\common\model\Subcom())->getSon($subcom_id);//获取子id集合
+        $allids[]=$subcom_id;//集合中添加自己id
+        $pro->whereIn('subcom_id',$allids);
+        $pageParam['query']['subcom_id']=$subcom_id;
+        $this->assign('_subcom',$subcom_id);
+
+        if($pro_name){
+            $pro->where('pro_name','like','%'.$pro_name.'%');
+            $pageParam['query']['pro_name']=$pro_name;
+            $this->assign('_pro_name',$pro_name);
         }
 
-        $this->assign('_project',$pro_data);
+        $proData=$pro->paginate(10,false,$pageParam);
+
+        $dataSubcom=(new \app\common\model\Subcom)->getAll();
+
+        $this->assign('sub',$dataSubcom);       
+
+        $this->assign('_project',$proData);
+
         return $this->fetch();
     }
 

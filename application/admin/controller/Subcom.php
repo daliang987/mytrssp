@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\Admin;
+use houdunwang\arr\Arr;
 
 class Subcom extends Admin{
 
@@ -14,16 +15,25 @@ class Subcom extends Admin{
 
     public function index(){
 
-        if(request()->isPost()){
-            $search=input('post.sub_search');
-            $dataSubcom=$this->db->searchAll($search);
+        $subcom_name=input('get.sub_search');
 
-            $this->assign("dataSubcom",$dataSubcom);
-            return $this->fetch();
-        }
-
+        $this->assign('_sub','');
+       
         $dataSubcom=$this->db->getAll();
         $this->assign("dataSubcom",$dataSubcom);
+
+        if($subcom_name){
+            $dataTree=Arr::tree(db('subcompany')->select(),"subcom_name",'subcom_id',"subcom_pid");
+            $temp_data=array();
+            foreach($dataTree as $data){
+                if(strstr($data['_subcom_name'],$subcom_name)){
+                    array_push($temp_data,$data);
+                }
+            }
+            $this->assign('dataSubcom',$temp_data);
+        }
+
+
         return $this->fetch();
     }
 

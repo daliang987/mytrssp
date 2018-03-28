@@ -23,8 +23,8 @@
                             <div class="input-group">
                                 <input class="form-control" name="thumb" readonly="" value="">
                                 <div class="input-group-btn">
-                                    <button onclick="upImagePc(this)" class="btn btn-danger" type="button">浏览</button>
-                                    <button onclick="useImage()" class="btn btn-primary" type="button">确定</button>
+                                    <button onclick="upImagePc(this)" class="btn btn-primary" type="button">浏览</button>
+                                    <button onclick="useImage()" class="btn btn-danger" type="button">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -56,15 +56,18 @@
                             <div class="form-group">
                                 <label for="subcompany" class="col-sm-3 col-md-3 control-label">
                                     所属分公司
-                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-6 col-md-6">
-                                    <select name="subcom_id" id="subcompany" class="form-control">
+                                    <select name="subcom_id" id="subcompany" class="form-control" disabled>
                                         {volist name="sub" id="com"}
                                         <option value="{$com.subcom_id}" {if condition="$user.subcom_id==$com.subcom_id" }selected{/if}>{$com._subcom_name}</option>
                                         {/volist}
                                     </select>
                                 </div>
+                                <label for="subcompany" class="col-sm-3 col-md-3 control-label">
+                                    
+                                    <span class="text-danger">用户无法修改分公司</span>
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="department" class="col-sm-3 col-md-3 control-label">
@@ -154,8 +157,8 @@
                                 message: data.msg,
                                 icon: 'glyphicon glyphicon-star',
                             }, {
-                                    offset: 50,
-                                    type: 'warning',
+                                    offset:50,
+                                    type: 'danger',
                                     delay: 3000
                                 })
                         })

@@ -21,11 +21,8 @@
     </div>
 
     <div class="login-body">
-        <div class="login-bg">
-            <img src="__STATIC__/img/login.jpg" alt="">
-        </div>
+        <hr>
         <div class="login-form">
-
             <h3 class="header text-center">
                 用户登录
             </h3>
@@ -34,31 +31,35 @@
             <form class="form-horizontal" role="form" method="post">
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-8">
-                        <div class="input-group ">
-                                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control " name="username" placeholder="用户名">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user" style="width:22px"></span>
+                            </span>
+                            <input type="text" class="form-control input-lg " name="username" placeholder="用户名">
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-8">
                         <div class="input-group ">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input type="password" class="form-control " name="password" placeholder="密码">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-lock" style="width:22px"></span>
+                            </span>
+                            <input type="password" class="form-control input-lg" name="password" placeholder="密码">
                         </div>
                     </div>
                 </div>
                 <div class="form-group has-warning">
-                    <img onclick="refresh_code()" id="captcha" alt="captcha" height="40" class="col-sm-offset-2 col-sm-4" />
+                    <img onclick="refresh_code()" id="captcha" alt="captcha" height="50" class="col-sm-offset-2 col-sm-4" />
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="captcha" placeholder="验证码">
+                        <input type="text" class="form-control input-lg" name="captcha" placeholder="验证码">
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-8">
-                        <input type="submit" class="btn btn-danger col-md-12" value="登录">
+                        <input type="submit" class="btn btn-danger btn-lg col-md-12" value="登录">
                     </div>
                 </div>
             </form>
@@ -66,40 +67,11 @@
     </div>
 
 
-    <div class="footer">
-        <div class="footer-left">
-            <ul>
-                <li>
-                    <a href="http://www.trs.com.cn/gywm/gsjj/">关于我们</a>
-                </li>
-                <li>
-                    <a hef="#">加入我们</a>
-                </li>
-                <li>
-                    <a href="http://www.trs.com.cn/gywm/lxwm/">联系我们</a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-right">
-            <ul>
-                <li>
-                    ©2017 北京拓尔思信息技术股份有限公司 版权所有.
-                </li>
-
-                <li>平台BUG反馈：
-                    <a href="mailto:wang.daliang@trs.com.cn">wang.daliang@trs.com.cn
-                    </a>
-                </li>
-
-        </div>
-    </div>
-
-
 </body>
 
 <script>
-    function refresh_code(){
-        $("#captcha").attr("src","{:url('captcha')}"+"?code="+Math.random());
+    function refresh_code() {
+        $("#captcha").attr("src", "{:url('captcha')}" + "?code=" + Math.random());
     }
     refresh_code();
 </script>

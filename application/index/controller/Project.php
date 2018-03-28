@@ -13,24 +13,34 @@ class Project extends Common{
     }
 
     public function index(){
-        $dataSubcom=(new \app\common\model\Subcom)->getAll();
-        $this->assign('sub',$dataSubcom);
-        $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')->where('pro_subcom_id',session('session.subcom_id'))->paginate(10);
 
-        if(request()->isPost()){
-            $allids=(new \app\common\model\Subcom())->getSon(input('post.subcom_id'));//获取子id集合
-            $allids[]=input('post.subcom_id');//集合中添加自己id
-            if(input('post.pro_name')){
-                $pro_data=db('project')->alias('pro')->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
-                ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')
-                ->whereIn('subcom_id',$allids)->where('pro_name','like','%'.input('post.pro_name').'%')
-                ->where('pro_subcom_id',session('session.subcom_id'))
-                ->paginate(10);
-            }
+        $pro_name=input('get.pro_name');
+
+        $this->assign('_pro_name','');
+
+        $pageParam=['query'=>[]];
+        
+        $pro=db('project')->alias('pro')
+        ->join('product pdt','pro.pro_product_id=pdt.pdt_id','left')
+        ->join('subcompany sub','sub.subcom_id=pro.pro_subcom_id','left')
+        ->where('pro_subcom_id',session('session.subcom_id'))->order('pro.pro_id desc');
+        
+        //前台用户只能看见自己的区域的项目，所以不需要区域分类搜索。
+
+        if($pro_name){
+
+            $pro->where('pro_name','like','%'.$pro_name.'%');
+            $pageParam['query']['pro_name']=$pro_name;
+            // halt($pro_name);
+            $this->assign('_pro_name',$pro_name);
         }
 
-        $this->assign('_project',$pro_data);
+        $proData=$pro->paginate(2,false,$pageParam);
+
+        $this->assign('_project',$proData);
+
         return $this->fetch();
+
     }
 
     public function store(){

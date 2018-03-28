@@ -19,7 +19,8 @@ class Article extends Model{
     }
 
     public function getAll(){
-        $dataArticle=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->order('create_time desc')->paginate(10);
+        $dataArticle=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')
+        ->order('create_time desc')->paginate(10);
         return $dataArticle;
     }
 
@@ -49,7 +50,7 @@ class Article extends Model{
                     $arc_res=(new \app\common\model\Arcvtype())->store($arc_vtype);
                     if($arc_res){
                         return ['valid'=>1,'msg'=>'发布文章成功'];
-                    }else{
+                   }else{
                         return ['valid'=>0,'msg'=>$this->getError()];
                     }
                 }else{
@@ -155,15 +156,4 @@ class Article extends Model{
         }
     }
 
-
-    public function search($data){
-        if($data['arc_type']==0){
-            $dataArc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->where('a.arc_title','like','%'.$data['arc_title'].'%')->order('create_time desc')->paginate(10);
-        }else{
-            // halt($data['arc_type']);
-            $dataArc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')->where('a.arc_type',$data['arc_type'])->where('a.arc_title','like','%'.$data['arc_title'].'%')->order('create_time desc')->paginate(2);
-            // halt($dataArc);
-        }
-        return $dataArc;
-    }
 }

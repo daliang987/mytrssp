@@ -7,8 +7,22 @@ use app\common\controller\Common;
 class Tool extends Common{
 
     public function tool(){
-        $tool=db('article')->where('arc_type','3')->field('arc_id,arc_title,create_time')->paginate(10);
-        $this->assign('tool',$tool);
+        $tool_name=input('get.tool_name');
+
+        $this->assign('tool_name','');
+
+        $tool=db('article')->where('arc_type','3')->field('arc_id,arc_title,create_time');
+        $pageParam=['query'=>[]];
+
+        if($tool_name){
+            $tool->where('arc_title','like','%'.$tool_name.'%');
+            $pageParam['query']['tool_name']=$tool_name;
+            $this->assign('tool_name',$tool_name);
+        }
+
+        $tooldata=$tool->paginate(10,false,$pageParam);
+
+        $this->assign('tool',$tooldata);
 
         return $this->fetch();
     }

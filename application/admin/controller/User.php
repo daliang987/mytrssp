@@ -14,17 +14,34 @@ class User extends Admin{
     }
 
     public function index(){
+
+        $subcom_id=input('get.subcom_id')?input('get.subcom_id'):0;
+        $username=input('get.username');
+
+        $this->assign('_sub_com',$subcom_id);
+        $this->assign('_username','');
+
         $dataSubcom=(new \app\common\model\Subcom)->getAll();
         $this->assign('sub',$dataSubcom);
 
-        if(request()->isPost()){
-            $dataUser=$this->db->search(input('post.'));
-            $this->assign('dataUser',$dataUser);
-            return $this->fetch();
+        $pageParam=['query'=>[]];
+        
+        $allids=(new \app\common\model\Subcom())->getSon($subcom_id);
+        $allids[]=$subcom_id;
+        $User=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')
+        ->whereIn('u.subcom_id',$allids);
+        $pageParam['query']['subcom_id']=$subcom_id;
+        $this->assign('subcom_id',$subcom_id);
+        // halt($User->select());
+        if($username){ 
+            $User->where('username','like','%'.$username.'%');
+            $pageParam['query']['username']=$username;
+            $this->assign('_username',$username);
         }
 
-        $dataUser=db('user')->alias('u')->join('subcompany sub','u.subcom_id=sub.subcom_id')->paginate(5);
-        $this->assign('dataUser',$dataUser);
+        $UserData=$User->paginate(10,false,$pageParam);
+
+        $this->assign('dataUser',$UserData);
 
         return $this->fetch();
     }
@@ -51,7 +68,9 @@ class User extends Admin{
     public function edit(){
 
         if(request()->isPost()){
-            $res=$this->db->edit(input('post.'));
+            $data=input('post.');
+           
+            $res=$this->db->edit($data);
             if($res['valid']){
                 $this->success($res['msg'],'index');exit;
             }else{
@@ -72,6 +91,7 @@ class User extends Admin{
     public function pass(){
 
         if(request()->isPost()){
+
             $res=$this->db->passbyadmin(input('post.'));
             if($res['valid']){
                 $this->success($res['msg'],'index');exit;

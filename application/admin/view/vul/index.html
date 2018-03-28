@@ -1,39 +1,40 @@
 {extend name="admin_base" /} {block name="admin_content"}
 <div class="alert alert-info">
-    我的漏洞列表
+    漏洞列表
 </div>
 
 <div class="panel panel-info">
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <form class="form-inline" method="post">
-                    <div class="form-group col-md-4">
-                        <label for="">状态：</label>
-                        <select class="form-control" name="vul_state" id="">
-                            <option seleted value="全部">全部</option>
-                            <option value="已提交">已提交</option>
-                            <option value="确认为漏洞暂时无法解决">确认为漏洞暂时无法解决</option>
-                            <option value="确认为漏洞已给出解决方案">确认为漏洞已给出解决方案</option>
-                            <option value="误报或无效漏洞">误报或无效漏洞</option>
-                            <option value="根据方案无法解决">根据方案无法解决</option>
-                            <option value="根据方案可以解决">根据方案可以解决</option>
-                        </select>
-                    </div>
+                <form class="form-inline" method="get">
                     <div class="form-group col-md-3">
                         <label for="">产品：</label>
                         <select class="form-control" name="pdt_id" id="">
-                            <option seleted value="0">全部</option>
+                            <option value="0">全部</option>
                             {volist name="pdt" id="_pdt"}
-                            <option value="{$_pdt.pdt_id}">{$_pdt.pdt_name}-{$_pdt.pdt_version}</option>
+                            <option value="{$_pdt.pdt_id}" {if condition="$_pdt.pdt_id==$pdt_id" } selected {/if}>{$_pdt.pdt_name}-{$_pdt.pdt_version}</option>
                             {/volist}
                         </select>
 
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="">状态：</label>
+                        <select class="form-control" name="vul_state" id="">
+                            <option value="全部">全部</option>
+                            <option value="已提交" {if condition="$vul_state eq '已提交'" } selected {/if}>已提交</option>
+                            <option value="确认为漏洞暂时无法解决" {if condition="$vul_state eq '确认为漏洞暂时无法解决'" } selected {/if}>确认为漏洞暂时无法解决</option>
+                            <option value="确认为漏洞已给出解决方案" {if condition="$vul_state eq '确认为漏洞已给出解决方案'" } selected {/if}>确认为漏洞已给出解决方案</option>
+                            <option value="误报或无效漏洞" {if condition="$vul_state eq '误报或无效漏洞'" } selected {/if}>误报或无效漏洞</option>
+                            <option value="根据方案无法解决" {if condition="$vul_state eq '根据方案无法解决'" } selected {/if}>根据方案无法解决</option>
+                            <option value="根据方案可以解决" {if condition="$vul_state eq '根据方案可以解决'" } selected {/if}>根据方案可以解决</option>
+                        </select>
+                    </div>
+
                     <div class="form-group col-md-5">
                         <div class="input-group col-md-12">
                             <span class="input-group-addon">漏洞标题</span>
-                            <input type="text" name="vul_title" class="form-control">
+                            <input type="text" name="vul_title" value="{$vul_title}" onfocus="$(this).select()" class="form-control">
                             <div class="input-group-btn">
                                 <input type="submit" value="搜索" class="btn btn-primary">
                             </div>

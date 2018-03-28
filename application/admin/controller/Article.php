@@ -14,20 +14,41 @@ class Article extends Admin{
     }
 
     public function index(){
+        //搜索 search
+        $arc_type    = input('get.arc_type');
+        $arc_title    = input('get.arc_title');
+        
+        $pageParam    = ['query' =>[]];
 
+        $Arc=db('article')->alias('a')->join('cate c','c.cate_id=a.arc_type','left')
+        ->order('create_time desc');
+
+        $this->assign('type',0);
+        $this->assign('title','');
+        
+        if($arc_type){
+            $Arc->where('a.arc_type',$arc_type);
+            $this->assign('type',$arc_type);
+            $pageParam['query']['arc_type']=$arc_type;
+        }
+
+        if($arc_title){
+            $Arc->where('a.arc_title','like','%'.$arc_title.'%'); 
+            $this->assign('title',$arc_title);
+            $pageParam['query']['arc_title']=$arc_title;
+        }
+
+        $dataArc=$Arc->paginate(10,false,$pageParam);
+        $this->assign('dataArc',$dataArc);
+        
         $cate_data=(new \app\common\model\Category())->getAll();
         $this->assign('cate_data',$cate_data);
 
-        $dataArc=$this->db->getAll();
-        $this->assign('dataArc',$dataArc);
 
         $cateData=db('cate')->where('cate_pid','0')->select();
         $this->assign("_cates",$cateData);
 
-        if(request()->isPost()){
-            $arcData=$this->db->search(input('post.'));
-            $this->assign('dataArc',$arcData);
-        }
+
 
         return $this->fetch();
     }

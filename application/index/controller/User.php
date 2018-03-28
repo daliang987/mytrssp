@@ -40,6 +40,9 @@ class User extends Common{
 
         if(request()->isPost()){
             $data=input('post.');
+            if(isset($data['subcom_id'])){
+                $this->error('用户不能修改所属分公司,请联系管理员');exit;
+            }
             if(isset($data['level'])){
                 $this->error('前台无法进行用户权限设置');exit;
             }

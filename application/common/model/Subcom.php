@@ -4,27 +4,10 @@ namespace app\common\model;
 use think\Model;
 use houdunwang\arr\Arr;
 
-
 class Subcom extends Model{
     protected $pk="subcom_id";
     protected $table="sp_subcompany";
 
-    public function searchAll($key){
-        // halt(db('subcompany')->select());
-        if($key){
-            $dataTree=Arr::tree(db('subcompany')->select(),"subcom_name",$this->pk,"subcom_pid");
-            $temp_data=array();
-            foreach($dataTree as $data){
-                if(strstr($data['_subcom_name'],$key)){
-                    array_push($temp_data,$data);
-                }
-            }
-            return $temp_data;
-        }else{
-            return $this->getAll();
-        }
-        
-    }
 
     public function getAll(){
         $dataTree=Arr::tree(db('subcompany')->select(),"subcom_name",$this->pk,"subcom_pid");

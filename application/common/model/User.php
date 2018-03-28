@@ -15,17 +15,6 @@ class User extends Model
         return md5($value);
     }
 
-    public function search($data){
-        if($data['subcom_id']==0){
-            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->where('username','like','%'.$data['username'].'%')->paginate(10);
-        }else{
-            $allids=(new \app\common\model\Subcom())->getSon($data['subcom_id']);
-            $allids[]=$data['subcom_id'];
-            $dataUser=db('user')->alias('u')->join('subcompany sub','sub.subcom_id=u.subcom_id')->whereIn('u.subcom_id',$allids)->where('username','like','%'.$data['username'].'%')->paginate(10);
-        }
-        return $dataUser;
-    }
-
     public function store($data){
 
         $user=db('user')->where('username',$data['username'])->find();
@@ -33,7 +22,7 @@ class User extends Model
             return ['valid'=>0,'msg'=>'用户名已存在'];
         }
 
-        $result=$this->validate('UserStore')->allowField(true)->save($data);
+        $result=$this->validate('User.add')->allowField(true)->save($data);
         if($result){
             return ['valid'=>1,'msg'=>'添加用户成功'];
         }else{
@@ -44,7 +33,8 @@ class User extends Model
 
 
     public function edit($data){
-        $result=$this->validate('UserEdit')->save($data,[$this->pk=>$data['uid']]);
+        $result=$this->validate('User.edit')->save($data,[$this->pk=>$data['uid']]);
+        // halt($result);
         if($result){
             return ['valid'=>1,'msg'=>'修改用户资料成功'];
         }else{
@@ -53,45 +43,48 @@ class User extends Model
     }
 
     public function passbyadmin($data){
-        $validate=new \app\common\validate\Passbyadmin();
-        if($validate->check($data)){
-            $user=db('user')->where('uid',$data['uid'])->find();
-            if($user){
-                $result=$this->save(['password'=>$data['newpass']],[$this->pk=>$data['uid']]);
+
+        $user=db('user')->where('uid',$data['uid'])->find();
+        if($user){
+            $validate	=	new	\app\common\validate\User();
+            $dataval	=	$validate->scene('password')->check($data);
+            if($dataval){
+                $result=$this->save(['password'=>$data['password']],[$this->pk=>$data['uid']]);
                 if($result){
                     return ['valid'=>1,'msg'=>'密码修改成功'];
                 }else{
                     return ['valid'=>0,'msg'=>$this->getError()];
                 }
             }else{
-                return ['valid'=>0,'msg'=>'不存在该用户'];
+                return ['valid'=>0,'msg'=>$validate->getError()];
             }
         }else{
-            return ['valid'=>0,'msg'=>$validate->getError()];
-        } 
+            return ['valid'=>0,'msg'=>'不存在该用户'];
+        }
     }
 
     public function pass($data){
-        $validate=new \app\common\validate\Pass();
-        if($validate->check($data)){
-            $oldpass=$data['password'];
-            $user=db('user')->where('uid',$data['uid'])->find();
-            if($user){
-                if($user['password']==md5($oldpass)){
-                    $result=$this->save(['password'=>$data['newpass']],[$this->pk=>$data['uid']]);
+        $oldpass=$data['old_password'];
+        $user=db('user')->where('uid',$data['uid'])->find();
+        if($user){
+            if($user['password']==md5($oldpass)){
+                $validate	=	new	\app\common\validate\User();
+                $dataval	=	$validate->scene('password')->check($data);
+                if($dataval){
+                    $result=$this->save(['password'=>$data['password']],[$this->pk=>$data['uid']]);
                     if($result){
                         return ['valid'=>1,'msg'=>'密码修改成功'];
                     }else{
                         return ['valid'=>0,'msg'=>$this->getError()];
                     }
                 }else{
-                    return ['valid'=>0,'msg'=>'原密码不正确'];
+                    return ['valid'=>0,'msg'=>$validate->getError()];
                 }
             }else{
-                return ['valid'=>0,'msg'=>'不存在该用户'];
+                return ['valid'=>0,'msg'=>'原密码不正确'];
             }
         }else{
-            return ['valid'=>0,'msg'=>$validate->getError()];
+            return ['valid'=>0,'msg'=>'不存在该用户'];
         }
     }
 

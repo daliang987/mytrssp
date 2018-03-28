@@ -15,30 +15,46 @@ class Vul extends Common{
     }
 
     public function index(){
-        $vul_data=db('vul')->where('vul_userid',session('session.userid'))->order('create_time','desc')->field('vul_id,create_time,vul_title,vul_state,vul_level')->select();
+
+        //接收参数，如果访问所有数据查询需要设置默认参数。
+        $vul_state=input('get.vul_state')?input('get.vul_state'):'';
+        $pdt_id=input('get.pdt_id')?input('get.pdt_id'):0;
+        $vul_title=input('get.vul_title');
+
+        
+        $this->assign('vul_state',$vul_state);
+        $this->assign('pdt_id',$pdt_id);
+        $this->assign('vul_title','');
+
+        $pageParam=['query'=>[]];
+
+        $vul=db('vul')->alias('v')->join('user u','u.uid=v.vul_userid','left')->where('vul_userid',session('session.userid'))->order('create_time','desc')->field('u.username,vul_id,create_time,vul_title,vul_state,vul_level');
+
+        if($vul_state!='全部' && $vul_state!=''){
+            $vul->where('vul_state',$vul_state);
+            $this->assign('vul_state',$vul_state);
+            $pageParam['query']['vul_state']=$vul_state;
+        }
+        
+        if($vul_title){
+            $vul->where('vul_title','like','%'.$vul_title.'%');
+            $this->assign('vul_title',$vul_title);
+            $pageParam['query']['vul_title']=$vul_title;
+        }
+
+        //非多级分类，如果为0，搜索全部，不用where条件，不为0则需要此条件
+        if($pdt_id!=0){
+            $vul->where('pdt_id',$pdt_id);
+            $this->assign('pdt_id',$pdt_id);
+            $pageParam['query']['pdt_id']=$pdt_id;
+        }
+
+        $VulData=$vul->paginate(10,false,$pageParam);
         
         $pdt_data=db('product')->select();
         $this->assign('pdt',$pdt_data);
          
-        if(request()->isPost()){
-            $search=input('post.');
-
-            if($search['vul_state']=='全部'){
-                if($search['pdt_id']=='0'){
-                    $vul_data=db('vul')->where('vul_userid',session('session.userid'))->order('create_time','desc')->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
-                }else{
-                    $vul_data=db('vul')->where('vul_userid',session('session.userid'))->order('create_time','desc')->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
-                }
-            }else{
-                if($search['pdt_id']=='0'){
-                    $vul_data=db('vul')->where('vul_userid',session('session.userid'))->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
-                }else{
-                    $vul_data=db('vul')->where('vul_userid',session('session.userid'))->order('create_time','desc')->where('vul_state',$search['vul_state'])->where('pdt_id',$search['pdt_id'])->where('vul_title','like','%'.$search['vul_title'].'%')->paginate(10);
-                }
-            }
-        }
-
-        $this->assign('vuldata',$vul_data);
+        $this->assign('vuldata',$VulData);
         return $this->fetch();
     }
 
