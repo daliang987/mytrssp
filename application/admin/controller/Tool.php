@@ -5,7 +5,7 @@ use app\common\controller\Admin;
 
 class Article extends User{
 
-    
+   protected function  
 
 }
 
