@@ -7,7 +7,7 @@
     <style type="text/css">
         *{ padding: 0; margin: 0; }
         body{ background: #fff; font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif; color: #333; font-size: 16px; }
-        .system-message{ padding: 24px 48px; text-align:center}
+        .system-message{ margin-top:60px; padding: 24px 48px; text-align:center}
         .system-message h3{ font-size: 50px; font-weight: normal; line-height: 80px; margin-bottom: 12px;color:#31708f }
         .system-message .jump{ padding-top: 10px; }
         .system-message .jump a{ color: #333; }
@@ -16,10 +16,12 @@
         .system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display: none; }
         .system-message hr{margin:15px 0px;}
         .danger {color:#d43f3a}
+
     </style>
 </head>
 <body>
     <div class="system-message">
+        <hr>
         <?php switch ($code) {?>
             <?php case 1:?>
             <h3>*^_^*</h3>

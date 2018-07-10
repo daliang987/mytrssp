@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -143,8 +143,10 @@
             </div>
             <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
                 <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
-                <div class="main">
-                    {block name="admin_content"} {/block}
+                <div hd-cloak>
+                    <div class="main">
+                        {block name="admin_content"} {/block}
+                    </div>
                 </div>
             </div>
         </div>

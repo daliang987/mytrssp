@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -84,9 +84,10 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-    {block name="content"}{/block}
-
+    <link rel="stylesheet" href="/resource/hdjs/dist/hdjs.css">
+    <div hd-cloak>
+        {block name="content"}{/block}
+    </div>
     <div class="footer">
         <div class="footer-left">
             <ul>

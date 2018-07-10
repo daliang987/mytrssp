@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -127,9 +127,10 @@
             </div>
             <link rel="stylesheet" href="__STATIC__/node_modules/hdjs/dist/hdjs.css">
             <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10 right-show">
-                <div class="main">
-
-                    {block name="user_content"} {/block}
+                <div hd-cloak>
+                    <div class="main">
+                        {block name="user_content"} {/block}
+                    </div>
                 </div>
             </div>
         </div>
@@ -140,7 +141,7 @@
 <link rel="stylesheet" href="__STATIC__/css/index.css">
 <link rel="stylesheet" href="__STATIC__/css/dashboard.css">
 <script>
-    require(['hdjs'],function () {
+    require(['hdjs'], function () {
         $(".nav-header").click(function () {
             // $(".nav-header").nextUntil(".nav-header").slideUp();
             $(this).nextUntil(".nav-header").slideToggle();
